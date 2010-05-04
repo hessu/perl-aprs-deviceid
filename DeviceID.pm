@@ -169,21 +169,8 @@ my %fixed_dstcalls = (
 		'class' => 'wx',
 	},
 	
-	'APU25N' => {
-		'vendor' => 'Roger Barker, G4IDE',
-		'model' => 'UI-View32',
-		'class' => 'software',
-		'os' => 'Windows',
-	},
-	'APU16N' => {
-		'vendor' => 'Roger Barker, G4IDE',
-		'model' => 'UI-View16',
-		'class' => 'software',
-		'os' => 'Windows',
-	},
-	
 	'APZMDR' => {
-		'vendor' => 'HaMDR',
+		'vendor' => 'Open Source',
 		'model' => 'HaMDR',
 		'class' => 'tracker',
 		'os' => 'embedded',
@@ -192,12 +179,6 @@ my %fixed_dstcalls = (
 		'vendor' => 'D-Star',
 		'model' => 'D2',
 		'class' => 'dstar',
-	},
-	
-	'APOT([A-Z0-9]{2})' => {
-		'vendor' => 'Argent Data Systems',
-		'model' => 'OpenTracker',
-		'class' => 'tracker',
 	},
 	
 	'APDPRS' => {
@@ -489,6 +470,41 @@ my @dstcall_regexps = (
 	} ],
 	[ 'APVE(\d{2})', {
 		'model' => 'EchoLink',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APW(\d{3})', {
+		'vendor' => 'Sproul Brothers',
+		'model' => 'WinAPRS',
+		'class' => 'software',
+		'os' => 'Windows',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APWM(\d{2})', {
+		'vendor' => 'KJ4ERJ',
+		'model' => 'APRSISCE',
+		'class' => 'software',
+		'os' => 'Windows CE',
+		'version_regexp' => 1,
+	} ],
+	[ 'APWW(\d{2})', {
+		'vendor' => 'KJ4ERJ',
+		'model' => 'APRSISCE',
+		'class' => 'software',
+		'os' => 'Windows',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APX(\d{3})', {
+		'model' => 'Xastir',
+		'class' => 'software',
+		'os' => 'Linux/Unix',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APXR(\d{2})', {
+		'model' => 'Xrouter',
 		'version_regexp' => 1,
 	} ],
 	
