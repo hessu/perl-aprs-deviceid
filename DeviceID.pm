@@ -146,6 +146,137 @@ sub debug($)
 }
 
 
+my %fixed_dstcalls = (
+	'AP1WWX' => {
+		'vendor' => 'TAPR',
+		'model' => 'T-238+',
+		'class' => 'wx',
+	},
+	
+	'APU25N' => {
+		'vendor' => 'Roger Barker, G4IDE',
+		'model' => 'UI-View32',
+		'class' => 'software',
+		'os' => 'Windows',
+	},
+	'APU16N' => {
+		'vendor' => 'Roger Barker, G4IDE',
+		'model' => 'UI-View16',
+		'class' => 'software',
+		'os' => 'Windows',
+	},
+	
+	'APZMDR' => {
+		'vendor' => 'HaMDR',
+		'model' => 'HaMDR',
+		'class' => 'tracker',
+		'os' => 'embedded',
+	},
+	'APJID2' => {
+		'vendor' => 'D-Star',
+		'model' => 'D2',
+		'class' => 'dstar',
+	},
+	
+	'APOTC1' => {
+		'vendor' => 'Argent Data Systems',
+		'model' => 'OpenTracker 1',
+		'class' => 'tracker',
+	},
+	'APOT21' => {
+		'vendor' => 'Argent Data Systems',
+		'model' => 'OpenTracker 2.1',
+		'class' => 'tracker',
+	},
+	'APOT2A' => {
+		'vendor' => 'Argent Data Systems',
+		'model' => 'OpenTracker 2.A',
+		'class' => 'tracker',
+	},
+);
+
+my @dstcall_regexps = (
+	[ 'APJI(\\d+)', {
+		'vendor' => 'D-Star',
+		'model' => 'unknown',
+		'class' => 'dstar',
+		'version_regexp' => 1,
+	} ],
+	[ 'APD(\\d+)', {
+		'vendor' => 'Open Source',
+		'model' => 'aprsd',
+		'class' => 'software',
+		'os' => 'Linux/Unix',
+		'version_regexp' => 1,
+	} ],
+	[ 'AP4R(\\d+)', {
+		'vendor' => 'Open Source',
+		'model' => 'APRS4R',
+		'class' => 'software',
+		'version_regexp' => 1,
+	} ],
+	[ 'AP(\\d{3})D', {
+		'vendor' => 'Painter Engineering',
+		'model' => 'uSmartDigi D-Gate',
+		'class' => 'dstar',
+	} ],
+	[ 'AP(\\d{3})U', {
+		'vendor' => 'Painter Engineering',
+		'model' => 'uSmartDigi Digipeater',
+		'class' => 'digi',
+	} ],
+);
+
+#
+# init code: compile the regular expressions to speed up matching
+#
+
+sub _compile_regexps()
+{
+	for (my $i = 0; $i <= $#dstcall_regexps; $i++) {
+		my $dmatch = $dstcall_regexps[$i];
+		my($regexp, $response) = @$dmatch;
+		
+		my $compiled = qr/^$regexp$/;
+		$dstcall_regexps[$i] = [ $regexp, $response, $compiled ];
+	}
+}
+
+_compile_regexps();
+
+=over
+
+=item identify($hashref)
+
+Tries to identify the device.
+
+=back
+
+=cut
+
+sub identify($)
+{
+	my($p) = @_;
+	
+	if (defined $fixed_dstcalls{$p->{'dstcallsign'}}) {
+		$p->{'deviceid'} = $fixed_dstcalls{$p->{'dstcallsign'}};
+		return 1;
+	}
+	
+	foreach my $dmatch (@dstcall_regexps) {
+		my($regexp, $response, $compiled) = @$dmatch;
+		warn "trying '$regexp' against " . $p->{'dstcallsign'} . "\n";
+		if ($p->{'dstcallsign'} =~ $compiled) {
+			warn "match!\n";
+			$p->{'deviceid'} = $response;
+			return 1;
+		}
+	}
+	
+	return 0;
+}
+
+
 1;
 __END__
 
