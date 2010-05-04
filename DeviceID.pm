@@ -153,6 +153,22 @@ my %fixed_dstcalls = (
 		'class' => 'wx',
 	},
 	
+	'APCLEY' => {
+		'vendor' => 'ZS6EY',
+		'model' => 'EYTraker',
+		'class' => 'tracker',
+	},
+	'APCLWX' => {
+		'vendor' => 'ZS6EY',
+		'model' => 'EYWeather',
+		'class' => 'wx',
+	},
+	'APCLEZ' => {
+		'vendor' => 'ZS6EY',
+		'model' => 'Telit EZ10 GSM application',
+		'class' => 'wx',
+	},
+	
 	'APU25N' => {
 		'vendor' => 'Roger Barker, G4IDE',
 		'model' => 'UI-View32',
@@ -193,6 +209,17 @@ my %fixed_dstcalls = (
 		'model' => 'OpenTracker 2.A',
 		'class' => 'tracker',
 	},
+	
+	'APDPRS' => {
+		'model' => 'D-Star DPRS',
+		'class' => 'dstar',
+	},
+	
+	'APERXQ' => {
+		'vendor' => 'PE1RXQ',
+		'model' => 'PE1RXQ APRS Tracker',
+		'class' => 'tracker',
+	},
 );
 
 my @dstcall_regexps = (
@@ -219,11 +246,78 @@ my @dstcall_regexps = (
 		'vendor' => 'Painter Engineering',
 		'model' => 'uSmartDigi D-Gate',
 		'class' => 'dstar',
+		'version_regexp' => 1,
 	} ],
 	[ 'AP(\\d{3})U', {
 		'vendor' => 'Painter Engineering',
 		'model' => 'uSmartDigi Digipeater',
 		'class' => 'digi',
+		'version_regexp' => 1,
+	} ],
+	[ 'APAF(\\d{2})', {
+		'model' => 'AFilter',
+		'version_regexp' => 1,
+	} ],
+	[ 'APAG(\\d{2})', {
+		'model' => 'AGate',
+		'version_regexp' => 1,
+	} ],
+	[ 'APAGW(\\d)', {
+		'vendor' => 'SV2AGW',
+		'model' => 'AGWtracker',
+		'class' => 'software',
+		'os' => 'Windows',
+		'version_regexp' => 1,
+	} ],
+	[ 'APAX(\\d{2})', {
+		'model' => 'AFilterX',
+		'version_regexp' => 1,
+	} ],
+	[ 'APAH(\\d{2})', {
+		'model' => 'AHub',
+		'version_regexp' => 1,
+	} ],
+	[ 'APAW(\\d{2})', {
+		'vendor' => 'SV2AGW',
+		'model' => 'AGWPE',
+		'class' => 'software',
+		'os' => 'Windows',
+		'version_regexp' => 1,
+	} ],
+	[ 'APC(\\d{3})', {
+		'vendor' => 'Rob Wittner, KZ5RW',
+		'model' => 'APRS/CE',
+		'class' => 'mobile',
+		'version_regexp' => 1,
+	} ],
+	[ 'APDT(\\d{2})', {
+		'model' => 'APRStouch Tone (DTMF)',
+		'version_regexp' => 1,
+	} ],
+	[ 'APDF(\\d{2})', {
+		'model' => 'Automatic DF units',
+		'version_regexp' => 1,
+	} ],
+	[ 'APE(\\d{3})', {
+		'model' => 'Telemetry devices',
+		'version_regexp' => 1,
+	} ],
+	[ 'APFG(\\d{2})', {
+		'vendor' => 'KP4DJT',
+		'model' => 'Flood Gage',
+		'class' => 'software',
+		'version_regexp' => 1,
+	} ],
+	[ 'APGO(\\d{2})', {
+		'vendor' => 'AA3NJ',
+		'model' => 'APRS-Go',
+		'class' => 'mobile',
+		'version_regexp' => 1,
+	} ],
+	[ 'APHK(\\d{2})', {
+		'vendor' => 'LA1BR',
+		'model' => 'Digipeater/tracker',
+		'version_regexp' => 1,
 	} ],
 );
 
@@ -282,6 +376,8 @@ __END__
 
 
 =head1 SEE ALSO
+
+APRS tocalls list, L<http://aprs.org/aprs11/tocalls.txt>
 
 APRS specification 1.0.1, L<http://www.tapr.org/aprs_working_group.html>
 
