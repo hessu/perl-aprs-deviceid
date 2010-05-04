@@ -194,19 +194,9 @@ my %fixed_dstcalls = (
 		'class' => 'dstar',
 	},
 	
-	'APOTC1' => {
+	'APOT([A-Z0-9]{2})' => {
 		'vendor' => 'Argent Data Systems',
-		'model' => 'OpenTracker 1',
-		'class' => 'tracker',
-	},
-	'APOT21' => {
-		'vendor' => 'Argent Data Systems',
-		'model' => 'OpenTracker 2.1',
-		'class' => 'tracker',
-	},
-	'APOT2A' => {
-		'vendor' => 'Argent Data Systems',
-		'model' => 'OpenTracker 2.A',
+		'model' => 'OpenTracker',
 		'class' => 'tracker',
 	},
 	
@@ -219,6 +209,21 @@ my %fixed_dstcalls = (
 		'vendor' => 'PE1RXQ',
 		'model' => 'PE1RXQ APRS Tracker',
 		'class' => 'tracker',
+	},
+	
+	'APNK01' => {
+		'vendor' => 'Kenwood',
+		'model' => 'D-700',
+		'version_regexp' => 1,
+	},
+	'APNK80' => {
+		'vendor' => 'Kantronics',
+		'model' => 'KAM',
+		'version' => '8.0',
+	},
+	'APNKMP' => {
+		'vendor' => 'Kantronics',
+		'model' => 'KAM+',
 	},
 );
 
@@ -319,6 +324,174 @@ my @dstcall_regexps = (
 		'model' => 'Digipeater/tracker',
 		'version_regexp' => 1,
 	} ],
+	
+	[ 'APJA(\\d{2})', {
+		'model' => 'JavAPRS',
+		'version_regexp' => 1,
+	} ],
+	[ 'APJE(\\d{2})', {
+		'model' => 'JeAPRS',
+		'version_regexp' => 1,
+	} ],
+	[ 'APJI(\\d{2})', {
+		'model' => 'jAPRSIgate',
+		'version_regexp' => 1,
+	} ],
+	[ 'APJS(\\d{2})', {
+		'vendor' => 'Peter Loveall, AE5PL',
+		'model' => 'javAPRSSrvr',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APK0(\\d{2})', {
+		'vendor' => 'Kenwood',
+		'model' => 'TH-D7',
+		'class' => 'ht',
+		'version_regexp' => 1,
+	} ],
+	[ 'APK1(\\d{2})', {
+		'vendor' => 'Kenwood',
+		'model' => 'TH-D700',
+		'class' => 'rig',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APN3(\\d{2})', {
+		'vendor' => 'Kantronics',
+		'model' => 'KPC-3',
+		'version_regexp' => 1,
+	} ],
+	[ 'APN9(\\d{2})', {
+		'vendor' => 'Kantronics',
+		'model' => 'KPC-9612',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APND(\\d{2})', {
+		'vendor' => 'PE1MEW',
+		'model' => 'DIGI_NED',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APNM(\\d{2})', {
+		'vendor' => 'MFJ',
+		'model' => 'TNC',
+		'version_regexp' => 1,
+	} ],
+	[ 'APNP(\\d{2})', {
+		'vendor' => 'PacComm',
+		'model' => 'TNC',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APNT(\\d{2})', {
+		'vendor' => 'SV2AGW',
+		'model' => 'TNT TNC as a digipeater',
+		'class' => 'digi',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APNU(\\d{2})', {
+		'vendor' => 'IW3FQG',
+		'model' => 'UIdigi',
+		'class' => 'digi',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APNX(\\d{2})', {
+		'vendor' => 'K6DBG',
+		'model' => 'TNC-X',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APOT([A-Z0-9]{2})', {
+		'vendor' => 'Argent Data Systems',
+		'model' => 'OpenTracker',
+		'class' => 'tracker',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APPT([A-Z0-9]{2})', {
+		'vendor' => 'JF6LZE',
+		'model' => 'KetaiTracker',
+		'class' => 'tracker',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APR(8\\d{2})', {
+		'vendor' => 'Bob Bruninga, WB4APR',
+		'model' => 'APRSdos',
+		'class' => 'software',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APRX([0-3].)', {
+		'vendor' => 'OH2MQK',
+		'model' => 'aprx',
+		'class' => 'software',
+		'version_regexp' => 1,
+	} ],
+	[ 'APRX([4-9].)', {
+		'model' => 'APRSmax',
+		'class' => 'software',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APTT([0-9])', {
+		'vendor' => 'Byonics',
+		'model' => 'TinyTrak',
+		'class' => 'tracker',
+		'version_regexp' => 1,
+	} ],
+	[ 'APT2([0-9]{2})', {
+		'vendor' => 'Byonics',
+		'model' => 'TinyTrak2',
+		'class' => 'tracker',
+		'version_regexp' => 1,
+	} ],
+	[ 'APT3([0-9A-Z]{2})', {
+		'vendor' => 'Byonics',
+		'model' => 'TinyTrack3',
+		'class' => 'tracker',
+		'version_regexp' => 1,
+	} ],
+	[ 'APT4([0-9A-Z]{2})', {
+		'vendor' => 'Byonics',
+		'model' => 'TinyTrack4',
+		'class' => 'tracker',
+		'version_regexp' => 1,
+	} ],
+	[ 'APTW(\\d{2})', {
+		'vendor' => 'Byonics',
+		'model' => 'WXTrak',
+		'class' => 'wx',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APU(2\\d.)', {
+		'vendor' => 'Roger Barker, G4IDE',
+		'model' => 'UI-View32',
+		'class' => 'software',
+		'os' => 'Windows',
+		'version_regexp' => 1,
+	} ],
+	[ 'APU(1\\d.)', {
+		'vendor' => 'Roger Barker, G4IDE',
+		'model' => 'UI-View16',
+		'class' => 'software',
+		'os' => 'Windows',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APVR(\d{2})', {
+		'model' => 'IRLP',
+		'version_regexp' => 1,
+	} ],
+	[ 'APVE(\d{2})', {
+		'model' => 'EchoLink',
+		'version_regexp' => 1,
+	} ],
+	
 );
 
 #
@@ -359,9 +532,9 @@ sub identify($)
 	
 	foreach my $dmatch (@dstcall_regexps) {
 		my($regexp, $response, $compiled) = @$dmatch;
-		warn "trying '$regexp' against " . $p->{'dstcallsign'} . "\n";
+		#warn "trying '$regexp' against " . $p->{'dstcallsign'} . "\n";
 		if ($p->{'dstcallsign'} =~ $compiled) {
-			warn "match!\n";
+			#warn "match!\n";
 			$p->{'deviceid'} = $response;
 			return 1;
 		}
