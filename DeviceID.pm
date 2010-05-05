@@ -42,6 +42,8 @@ None by default.
 use strict;
 use warnings;
 
+use Data::Dumper;
+
 require Exporter;
 
 our @ISA = qw(Exporter);
@@ -145,6 +147,23 @@ sub debug($)
 	}
 }
 
+my %response = (
+	'd7' => {
+		'vendor' => 'Kenwood',
+		'model' => 'TH-D7',
+		'class' => 'ht',
+	},
+	'd700' => {
+		'vendor' => 'Kenwood',
+		'model' => 'TM-D700',
+		'class' => 'rig',
+	},
+	'd710' => {
+		'vendor' => 'Kenwood',
+		'model' => 'TM-D710',
+		'class' => 'rig',
+	},
+);
 
 my %fixed_dstcalls = (
 	'AP1WWX' => {
@@ -332,7 +351,7 @@ my @dstcall_regexps = (
 	} ],
 	[ 'APK1(\\d{2})', {
 		'vendor' => 'Kenwood',
-		'model' => 'TH-D700',
+		'model' => 'TM-D700',
 		'class' => 'rig',
 		'version_regexp' => 1,
 	} ],
@@ -540,6 +559,25 @@ Tries to identify the device.
 sub identify($)
 {
 	my($p) = @_;
+	
+	if (!defined $p->{'dstcallsign'} || !defined $p->{'format'}) {
+		return 0;
+	}
+	
+	if ($p->{'format'} eq 'mice') {
+		warn Dumper($p);
+		if ($p->{'comment'} =~ s/^>//) {
+			$p->{'deviceid'} = $response{'d7'};
+			return 1;
+		} elsif ($p->{'comment'} =~ s/^\](.*)=$/$1/) {
+			$p->{'deviceid'} = $response{'d710'};
+			return 1;
+		} elsif ($p->{'comment'} =~ s/^\]//) {
+			$p->{'deviceid'} = $response{'d700'};
+			return 1;
+		}
+		return 0;
+	}
 	
 	if (defined $fixed_dstcalls{$p->{'dstcallsign'}}) {
 		$p->{'deviceid'} = $fixed_dstcalls{$p->{'dstcallsign'}};
