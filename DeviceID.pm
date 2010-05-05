@@ -517,13 +517,13 @@ my @dstcall_regexps = (
 	} ],
 	[ 'APT3([0-9A-Z]{2})', {
 		'vendor' => 'Byonics',
-		'model' => 'TinyTrack3',
+		'model' => 'TinyTrak3',
 		'class' => 'tracker',
 		'version_regexp' => 1,
 	} ],
 	[ 'APT4([0-9A-Z]{2})', {
 		'vendor' => 'Byonics',
-		'model' => 'TinyTrack4',
+		'model' => 'TinyTrak4',
 		'class' => 'tracker',
 		'version_regexp' => 1,
 	} ],
