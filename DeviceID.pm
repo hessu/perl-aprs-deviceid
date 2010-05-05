@@ -42,7 +42,7 @@ None by default.
 use strict;
 use warnings;
 
-use Data::Dumper;
+#use Data::Dumper;
 
 require Exporter;
 
@@ -162,6 +162,31 @@ my %response = (
 		'vendor' => 'Kenwood',
 		'model' => 'TM-D710',
 		'class' => 'rig',
+	},
+	'vx8' => {
+		'vendor' => 'Yaesu',
+		'model' => 'VX-8',
+		'class' => 'ht',
+	},
+	'vx8g' => {
+		'vendor' => 'Yaesu',
+		'model' => 'VX-8G',
+		'class' => 'ht',
+	},
+	'ftm350' => {
+		'vendor' => 'Yaesu',
+		'model' => 'FTM-350',
+		'class' => 'ht',
+	},
+	'tt3' => {
+		'vendor' => 'Byonics',
+		'model' => 'TinyTrak3',
+		'class' => 'tracker',
+	},
+	'tt4' => {
+		'vendor' => 'Byonics',
+		'model' => 'TinyTrak4',
+		'class' => 'tracker',
 	},
 );
 
@@ -565,15 +590,28 @@ sub identify($)
 	}
 	
 	if ($p->{'format'} eq 'mice') {
-		warn Dumper($p);
+		#warn Dumper($p);
+		my $resp;
+		#warn "comment: " . $p->{'comment'} . "\n";
 		if ($p->{'comment'} =~ s/^>//) {
-			$p->{'deviceid'} = $response{'d7'};
-			return 1;
+			$resp = 'd7';
 		} elsif ($p->{'comment'} =~ s/^\](.*)=$/$1/) {
-			$p->{'deviceid'} = $response{'d710'};
-			return 1;
+			$resp = 'd710';
 		} elsif ($p->{'comment'} =~ s/^\]//) {
-			$p->{'deviceid'} = $response{'d700'};
+			$resp = 'd700';
+		} elsif ($p->{'comment'} =~ s/^`(.*)_\s*$/$1/) {
+			$resp = 'vx8';
+		} elsif ($p->{'comment'} =~ s/^`(.*)_"$/$1/) {
+			$resp = 'ftm350';
+		} elsif ($p->{'comment'} =~ s/^`(.*)_#$/$1/) {
+			$resp = 'vx8g';
+		} elsif ($p->{'comment'} =~ s/^`(.*)\|3$/$1/) {
+			$resp = 'tt3';
+		} elsif ($p->{'comment'} =~ s/^`(.*)\|4$/$1/) {
+			$resp = 'tt4';
+		}
+		if ($resp) {
+			$p->{'deviceid'} = $response{$resp};
 			return 1;
 		}
 		return 0;
