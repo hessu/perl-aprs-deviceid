@@ -59,7 +59,7 @@ while (my $l = <>) {
 		}
 		
 		$identify_ok++;
-		$call_id{$p{'srccallsign'}} = 1;
+		$call_id{$p{'srccallsign'}} = $p{'deviceid'};
 		
 		$id_format{$p{'format'}} = defined $id_format{$p{'format'}} ? $id_format{$p{'format'}} + 1 : 1;
 		if ($p{'format'} ne 'mice') {
@@ -88,6 +88,14 @@ foreach my $k (sort { $id_format{$a} <=> $id_format{$b} } keys %id_format) {
 	printf("    $k $id_format{$k} (%.1f %%)\n", $id_format{$k} / ($id_format{$k} + $unid_format{$k}) * 100);
 }
 
+print "\n";
+print "Most common unidentified dstcalls:\n";
+my $n = 0;
+foreach my $k (sort { $unid_dstcall{$b} <=> $unid_dstcall{$a} } keys %unid_dstcall) {
+	$n++;
+	printf("    $k $unid_dstcall{$k}\n");
+	last if ($n >= 20);
+}
 
 my @calls = keys %call;
 my @calls_id = keys %call_id;
@@ -95,4 +103,29 @@ my @calls_id = keys %call_id;
 print "\n";
 printf("%d unique srccalls with location packets, %d identified (%.1f %%)\n", $#calls+1, $#calls_id+1, ($#calls_id+1) / ($#calls+1) * 100);
 
-print "\n";
+my %sum = (
+	'vendor' => {},
+	'model' => {},
+);
+foreach my $c (keys %call_id) {
+	my $h = $call_id{$c};
+	foreach my $t ('vendor') {
+		if (defined $h->{$t}) {
+			$sum{$t}{$h->{$t}} = defined $sum{$t}{$h->{$t}} ? $sum{$t}{$h->{$t}} + 1 : 1;
+		}
+	}
+	
+	if (defined $h->{'vendor'} && defined $h->{'model'}) {
+		my $vm = $h->{'vendor'} . ': ' . $h->{'model'};
+		$sum{'model'}{$vm} = defined $sum{'model'}{$vm} ? $sum{'model'}{$vm} + 1 : 1;
+	}
+}
+
+foreach my $t (sort keys %sum) {
+	print "\n$t:\n";
+	my $h = $sum{$t};
+	foreach my $k (sort { $h->{$b} <=> $h->{$a} } keys %$h) {
+		printf("  %d %s\n", $h->{$k}, $k);
+	}
+}
+

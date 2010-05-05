@@ -226,13 +226,14 @@ my %fixed_dstcalls = (
 		'os' => 'embedded',
 	},
 	'APJID2' => {
-		'vendor' => 'D-Star',
-		'model' => 'D2',
+		'vendor' => 'Peter Loveall, AE5PL',
+		'model' => 'D-Star APJID2',
 		'class' => 'dstar',
 	},
 	
 	'APDPRS' => {
-		'model' => 'D-Star DPRS',
+		'vendor' => 'unknown',
+		'model' => 'D-Star APDPRS',
 		'class' => 'dstar',
 	},
 	
@@ -257,12 +258,22 @@ my %fixed_dstcalls = (
 		'vendor' => 'Kantronics',
 		'model' => 'KAM+',
 	},
+	'APAGW' => {
+		'vendor' => 'SV2AGW',
+		'model' => 'AGWtracker',
+		'class' => 'software',
+		'os' => 'Windows',
+	},
+	'PSKAPR' => {
+		'vendor' => 'unknown',
+		'model' => 'PSKAPR',
+	},
 );
 
 my @dstcall_regexps = (
 	[ 'APJI(\\d+)', {
-		'vendor' => 'D-Star',
-		'model' => 'unknown',
+		'vendor' => 'Peter Loveall, AE5PL',
+		'model' => 'D-Star APJI',
 		'class' => 'dstar',
 		'version_regexp' => 1,
 	} ],
@@ -328,6 +339,7 @@ my @dstcall_regexps = (
 		'version_regexp' => 1,
 	} ],
 	[ 'APDT(\\d{2})', {
+		'vendor' => 'unknown',
 		'model' => 'APRStouch Tone (DTMF)',
 		'version_regexp' => 1,
 	} ],
@@ -357,6 +369,13 @@ my @dstcall_regexps = (
 		'version_regexp' => 1,
 	} ],
 	
+	[ 'API(\\d{3})', {
+		'vendor' => 'Icom',
+		'model' => 'unknown',
+		'class' => 'dstar',
+		'version_regexp' => 1,
+	} ],
+	
 	[ 'APJA(\\d{2})', {
 		'model' => 'JavAPRS',
 		'version_regexp' => 1,
@@ -366,6 +385,7 @@ my @dstcall_regexps = (
 		'version_regexp' => 1,
 	} ],
 	[ 'APJI(\\d{2})', {
+		'vendor' => 'Peter Loveall, AE5PL',
 		'model' => 'jAPRSIgate',
 		'version_regexp' => 1,
 	} ],
@@ -423,7 +443,13 @@ my @dstcall_regexps = (
 		'version_regexp' => 1,
 	} ],
 	
-	[ 'APNU(\\d{2})', {
+	[ 'APNU([A-Z0-9]{2})', {
+		'vendor' => 'IW3FQG',
+		'model' => 'UIdigi',
+		'class' => 'digi',
+		'version_regexp' => 1,
+	} ],
+	[ 'APNU([0-9]{2}\-[0-9])', {
 		'vendor' => 'IW3FQG',
 		'model' => 'UIdigi',
 		'class' => 'digi',
@@ -464,10 +490,18 @@ my @dstcall_regexps = (
 		'version_regexp' => 1,
 	} ],
 	[ 'APRX([4-9].)', {
+		'vendor' => 'Bob Bruninga, WB4APR',
 		'model' => 'APRSmax',
 		'class' => 'software',
 		'version_regexp' => 1,
 	} ],
+	[ 'APS(\\d{3})', {
+		'vendor' => 'Brent Hildebrand, KH2Z',
+		'model' => 'APRS+SA',
+		'class' => 'software',
+		'version_regexp' => 1,
+	} ],
+	
 	
 	[ 'APTT([0-9])', {
 		'vendor' => 'Byonics',
@@ -516,10 +550,12 @@ my @dstcall_regexps = (
 	} ],
 	
 	[ 'APVR(\d{2})', {
+		'vendor' => 'unknown',
 		'model' => 'IRLP',
 		'version_regexp' => 1,
 	} ],
 	[ 'APVE(\d{2})', {
+		'vendor' => 'unknown',
 		'model' => 'EchoLink',
 		'version_regexp' => 1,
 	} ],
@@ -600,6 +636,7 @@ sub identify($)
 		#warn Dumper($p);
 		my $resp;
 		#warn "comment: " . $p->{'comment'} . "\n";
+		return 0 if (!defined $p->{'comment'});
 		if ($p->{'comment'} =~ s/^>//) {
 			$resp = 'd7';
 		} elsif ($p->{'comment'} =~ s/^\](.*)=$/$1/) {
