@@ -152,31 +152,37 @@ my %response = (
 		'vendor' => 'Kenwood',
 		'model' => 'TH-D7',
 		'class' => 'ht',
+		'messaging' => 1,
 	},
 	'd700' => {
 		'vendor' => 'Kenwood',
 		'model' => 'TM-D700',
 		'class' => 'rig',
+		'messaging' => 1,
 	},
 	'd710' => {
 		'vendor' => 'Kenwood',
 		'model' => 'TM-D710',
 		'class' => 'rig',
+		'messaging' => 1,
 	},
 	'vx8' => {
 		'vendor' => 'Yaesu',
 		'model' => 'VX-8',
 		'class' => 'ht',
+		'messaging' => 1,
 	},
 	'vx8g' => {
 		'vendor' => 'Yaesu',
 		'model' => 'VX-8G',
 		'class' => 'ht',
+		'messaging' => 1,
 	},
 	'ftm350' => {
 		'vendor' => 'Yaesu',
 		'model' => 'FTM-350',
 		'class' => 'ht',
+		'messaging' => 1,
 	},
 	'tt3' => {
 		'vendor' => 'Byonics',
@@ -239,6 +245,7 @@ my %fixed_dstcalls = (
 	'APNK01' => {
 		'vendor' => 'Kenwood',
 		'model' => 'D-700',
+		'messaging' => 1,
 		'version_regexp' => 1,
 	},
 	'APNK80' => {
