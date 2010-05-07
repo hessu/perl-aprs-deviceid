@@ -94,7 +94,7 @@ my $n = 0;
 foreach my $k (sort { $unid_dstcall{$b} <=> $unid_dstcall{$a} } keys %unid_dstcall) {
 	$n++;
 	printf("    $k $unid_dstcall{$k}\n");
-	last if ($n >= 20);
+	last if ($n >= 50);
 }
 
 my @calls = keys %call;

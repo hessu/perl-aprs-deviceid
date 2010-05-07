@@ -245,7 +245,8 @@ my %fixed_dstcalls = (
 	
 	'APNK01' => {
 		'vendor' => 'Kenwood',
-		'model' => 'D-700',
+		'model' => 'TM-D700',
+		'class' => 'rig',
 		'messaging' => 1,
 		'version_regexp' => 1,
 	},
@@ -267,6 +268,24 @@ my %fixed_dstcalls = (
 	'PSKAPR' => {
 		'vendor' => 'unknown',
 		'model' => 'PSKAPR',
+	},
+	'APZ186' => {
+		'vendor' => 'IW3FQG',
+		'model' => 'UIdigi',
+		'class' => 'digi',
+		'version' => '186'
+	},
+	'APZ18' => {
+		'vendor' => 'IW3FQG',
+		'model' => 'UIdigi',
+		'class' => 'digi',
+		'version' => '18'
+	},
+	'APZ19' => {
+		'vendor' => 'IW3FQG',
+		'model' => 'UIdigi',
+		'class' => 'digi',
+		'version' => '19'
 	},
 );
 
@@ -338,6 +357,12 @@ my @dstcall_regexps = (
 		'class' => 'mobile',
 		'version_regexp' => 1,
 	} ],
+	[ 'APCL(\\d{2})', {
+		'vendor' => 'maprs.org',
+		'model' => 'maprs',
+		'class' => 'mobile',
+		'version_regexp' => 1,
+	} ],
 	[ 'APDT(\\d{2})', {
 		'vendor' => 'unknown',
 		'model' => 'APRStouch Tone (DTMF)',
@@ -377,10 +402,12 @@ my @dstcall_regexps = (
 	} ],
 	
 	[ 'APJA(\\d{2})', {
+		'vendor' => 'K4HG & AE5PL',
 		'model' => 'JavAPRS',
 		'version_regexp' => 1,
 	} ],
 	[ 'APJE(\\d{2})', {
+		'vendor' => 'Gregg Wonderly, W5GGW',
 		'model' => 'JeAPRS',
 		'version_regexp' => 1,
 	} ],
@@ -408,6 +435,12 @@ my @dstcall_regexps = (
 		'version_regexp' => 1,
 	} ],
 	
+	[ 'APAND(\\d)', {
+		'vendor' => 'Open Source',
+		'model' => 'APRSdroid',
+		'os' => 'Android',
+		'version_regexp' => 1,
+	} ],
 	[ 'APN3(\\d{2})', {
 		'vendor' => 'Kantronics',
 		'model' => 'KPC-3',
@@ -419,7 +452,7 @@ my @dstcall_regexps = (
 		'version_regexp' => 1,
 	} ],
 	
-	[ 'APND(\\d{2})', {
+	[ 'APND([0-9A-Z]{2})', {
 		'vendor' => 'PE1MEW',
 		'model' => 'DIGI_NED',
 		'version_regexp' => 1,
@@ -449,7 +482,7 @@ my @dstcall_regexps = (
 		'class' => 'digi',
 		'version_regexp' => 1,
 	} ],
-	[ 'APNU([0-9]{2}\-[0-9])', {
+	[ 'APNU([0-9]{2}\\-[0-9])', {
 		'vendor' => 'IW3FQG',
 		'model' => 'UIdigi',
 		'class' => 'digi',
@@ -549,18 +582,18 @@ my @dstcall_regexps = (
 		'version_regexp' => 1,
 	} ],
 	
-	[ 'APVR(\d{2})', {
+	[ 'APVR(\\d{2})', {
 		'vendor' => 'unknown',
 		'model' => 'IRLP',
 		'version_regexp' => 1,
 	} ],
-	[ 'APVE(\d{2})', {
+	[ 'APVE(\\d{2})', {
 		'vendor' => 'unknown',
 		'model' => 'EchoLink',
 		'version_regexp' => 1,
 	} ],
 	
-	[ 'APW(\d{3})', {
+	[ 'APW(\\d{3})', {
 		'vendor' => 'Sproul Brothers',
 		'model' => 'WinAPRS',
 		'class' => 'software',
@@ -568,14 +601,14 @@ my @dstcall_regexps = (
 		'version_regexp' => 1,
 	} ],
 	
-	[ 'APWM(\d{2})', {
+	[ 'APWM(\\d{2})', {
 		'vendor' => 'KJ4ERJ',
 		'model' => 'APRSISCE',
 		'class' => 'software',
 		'os' => 'Windows CE',
 		'version_regexp' => 1,
 	} ],
-	[ 'APWW(\d{2})', {
+	[ 'APWW(\\d{2})', {
 		'vendor' => 'KJ4ERJ',
 		'model' => 'APRSISCE',
 		'class' => 'software',
@@ -583,15 +616,25 @@ my @dstcall_regexps = (
 		'version_regexp' => 1,
 	} ],
 	
-	[ 'APX(\d{3})', {
+	[ 'APX(\\d{3})', {
+		'vendor' => 'Open Source',
 		'model' => 'Xastir',
 		'class' => 'software',
 		'os' => 'Linux/Unix',
 		'version_regexp' => 1,
 	} ],
 	
-	[ 'APXR(\d{2})', {
+	[ 'APXR(\\d{2})', {
+		'vendor' => 'G8PZT',
 		'model' => 'Xrouter',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APZG(\\d{2})', {
+		'vendor' => 'OH2GVE',
+		'model' => 'aprsg',
+		'class' => 'software',
+		'os' => 'Linux/Unix',
 		'version_regexp' => 1,
 	} ],
 	
