@@ -18,7 +18,7 @@ my $identify_ok = 0;
 my $start_t = time();
 
 my $min_t;
-my $max_t;
+my $max_t = 0;
 
 my %unid_format;
 my %unid_dstcall;
@@ -29,13 +29,13 @@ my %id_dstcall;
 my %call;
 my %call_id;
 
-while (my $l = <>) {
-	$l =~ s/[\r\n]+$//;
-	if ($l =~ /^(\d+)\s+(.*)/) {
+my $l;
+while ($l = <>) {
+	if ($l =~ /^(\d+)\s+(.*)[\r\n]+$/) {
 		$lines++;
 		
-		$min_t = $1 if (!defined $min_t || $1 < $min_t);
-		$max_t = $1 if (!defined $max_t || $1 > $max_t);
+		$min_t = $1 if (!defined $min_t); # || $1 < $min_t);
+		$max_t = $1; # if ($1 > $max_t);
 		
 		my %p;
 		my $ret = parseaprs($2, \%p);
@@ -47,7 +47,7 @@ while (my $l = <>) {
 		$location_packet++;
 		$call{$p{'srccallsign'}} = 1;
 		
-		$ret = identify(\%p);
+		$ret = 0; # identify(\%p);
 		
 		if ($ret != 1) {
 			$p{'format'} = 'NONE' if (!defined $p{'format'});
