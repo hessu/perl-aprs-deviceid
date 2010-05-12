@@ -47,7 +47,7 @@ while ($l = <>) {
 		$location_packet++;
 		$call{$p{'srccallsign'}} = 1;
 		
-		$ret = 0; # identify(\%p);
+		$ret = identify(\%p);
 		
 		if ($ret != 1) {
 			$p{'format'} = 'NONE' if (!defined $p{'format'});

@@ -197,6 +197,11 @@ my %response = (
 );
 
 my %fixed_dstcalls = (
+	'APRS' => {
+		'vendor' => 'unknown',
+		'model' => 'unknown',
+	},
+	
 	'AP1WWX' => {
 		'vendor' => 'TAPR',
 		'model' => 'T-238+',
@@ -567,7 +572,7 @@ my @dstcall_regexps = (
 		'version_regexp' => 1,
 	} ],
 	
-	[ 'APU(2\\d.)', {
+	[ 'APU(2\\d.)(.{0,1})', {
 		'vendor' => 'Roger Barker, G4IDE',
 		'model' => 'UI-View32',
 		'class' => 'software',
@@ -640,6 +645,8 @@ my @dstcall_regexps = (
 	
 );
 
+my %regexp_prefix;
+
 #
 # init code: compile the regular expressions to speed up matching
 #
@@ -655,7 +662,35 @@ sub _compile_regexps()
 	}
 }
 
+#
+# init: optimize regexps with an initial hash lookup
+#
+
+sub _optimize_regexps()
+{
+	my @left;
+	
+	for (my $i = 0; $i <= $#dstcall_regexps; $i++) {
+		my $dmatch = $dstcall_regexps[$i];
+		my($regexp, $response, $compiled) = @$dmatch;
+		
+		if ($regexp =~ /^([^\(]{2,5})(\(.*)$/) {
+			if (!defined $regexp_prefix{$1} ) {
+				$regexp_prefix{$1} = [ $dmatch ];
+			} else {
+				push @{ $regexp_prefix{$1} }, $dmatch;
+			}
+		} else {
+			push @left, $dmatch;
+			warn "optimize: leaving $regexp over\n";
+		}
+	}
+	
+	@dstcall_regexps = @left;
+}
+
 _compile_regexps();
+_optimize_regexps();
 
 =over
 
@@ -709,13 +744,18 @@ sub identify($)
 		return 1;
 	}
 	
-	foreach my $dmatch (@dstcall_regexps) {
-		my($regexp, $response, $compiled) = @$dmatch;
-		#warn "trying '$regexp' against " . $p->{'dstcallsign'} . "\n";
-		if ($p->{'dstcallsign'} =~ $compiled) {
-			#warn "match!\n";
-			$p->{'deviceid'} = $response;
-			return 1;
+	foreach my $len (4, 3, 5, 2) {
+		my $prefix = substr($p->{'dstcallsign'}, 0, $len);
+		if (defined $regexp_prefix{$prefix}) {
+			foreach my $dmatch (@{ $regexp_prefix{$prefix} }) {
+				my($regexp, $response, $compiled) = @$dmatch;
+				#warn "trying '$regexp' against " . $p->{'dstcallsign'} . "\n";
+				if ($p->{'dstcallsign'} =~ $compiled) {
+					#warn "match!\n";
+					$p->{'deviceid'} = $response;
+					return 1;
+				}
+			}
 		}
 	}
 	
