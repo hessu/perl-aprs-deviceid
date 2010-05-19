@@ -72,30 +72,9 @@ my $end_t = time();
 my $dur_t = $end_t - $start_t;
 
 printf("parsed $lines lines in %.3f s: %.0f lines/s\n", $dur_t, $lines / $dur_t);
-printf("$parse_ok (%.1f %% of total lines) parsed correctly using FAP\n", $parse_ok / $lines * 100);
+printf("$parse_ok (%.1f %% of total lines) parsed successfully using FAP\n", $parse_ok / $lines * 100);
 printf("$location_packet (%.1f %% of total, %.1f %% of parsed) were location packets\n", $location_packet / $lines * 100, $location_packet / $parse_ok * 100);
 printf("$identify_ok (%.1f %% of location packets) were identified ok\n", $identify_ok / $lines * 100);
-
-print "\n";
-print "Unidentified in formats:\n";
-foreach my $k (sort { $unid_format{$a} <=> $unid_format{$b} } keys %unid_format) {
-	printf("    $k $unid_format{$k} (%.1f %%)\n", $unid_format{$k} / ($id_format{$k} + $unid_format{$k}) * 100);
-}
-
-print "\n";
-print "Identified in formats:\n";
-foreach my $k (sort { $id_format{$a} <=> $id_format{$b} } keys %id_format) {
-	printf("    $k $id_format{$k} (%.1f %%)\n", $id_format{$k} / ($id_format{$k} + $unid_format{$k}) * 100);
-}
-
-print "\n";
-print "Most common unidentified dstcalls:\n";
-my $n = 0;
-foreach my $k (sort { $unid_dstcall{$b} <=> $unid_dstcall{$a} } keys %unid_dstcall) {
-	$n++;
-	printf("    $k $unid_dstcall{$k}\n");
-	last if ($n >= 50);
-}
 
 my @calls = keys %call;
 my @calls_id = keys %call_id;
@@ -127,5 +106,38 @@ foreach my $t (sort keys %sum) {
 	foreach my $k (sort { $h->{$b} <=> $h->{$a} } keys %$h) {
 		printf("  %d %s\n", $h->{$k}, $k);
 	}
+}
+
+print "\n";
+print "Unidentified in formats:\n";
+foreach my $k (sort { $unid_format{$a} <=> $unid_format{$b} } keys %unid_format) {
+	printf("    $k $unid_format{$k} (%.1f %%)\n", $unid_format{$k} / ($id_format{$k} + $unid_format{$k}) * 100);
+}
+
+print "\n";
+print "Identified in formats:\n";
+foreach my $k (sort { $id_format{$a} <=> $id_format{$b} } keys %id_format) {
+	printf("    $k $id_format{$k} (%.1f %%)\n", $id_format{$k} / ($id_format{$k} + $unid_format{$k}) * 100);
+}
+
+print "\n";
+print "Most common unidentified dstcalls:\n";
+my $n = 0;
+foreach my $k (sort { $unid_dstcall{$b} <=> $unid_dstcall{$a} } keys %unid_dstcall) {
+	$n++;
+	printf("    $k $unid_dstcall{$k}\n");
+	last if ($n >= 50);
+}
+
+
+print "\n";
+print "Callsigns and vendors:\n";
+foreach my $c (keys %call_id) {
+	my $h = $call_id{$c};
+	
+	printf("%-15.15s %s: %s\n", $c,
+		defined $h->{'vendor'} ? $h->{'vendor'} : '??',
+		defined $h->{'model'} ? $h->{'model'} : '??'
+		);
 }
 

@@ -727,9 +727,9 @@ sub identify($)
 			$resp = 'ftm350';
 		} elsif ($p->{'comment'} =~ s/^`(.*)_#$/$1/) {
 			$resp = 'vx8g';
-		} elsif ($p->{'comment'} =~ s/^`(.*)\|3$/$1/) {
+		} elsif ($p->{'comment'} =~ s/^\'(.*)\|3$/$1/) {
 			$resp = 'tt3';
-		} elsif ($p->{'comment'} =~ s/^`(.*)\|4$/$1/) {
+		} elsif ($p->{'comment'} =~ s/^\'(.*)\|4$/$1/) {
 			$resp = 'tt4';
 		}
 		if ($resp) {
