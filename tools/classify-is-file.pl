@@ -71,6 +71,11 @@ while ($l = <>) {
 my $end_t = time();
 my $dur_t = $end_t - $start_t;
 
+print "\naprs.fi global APRS device identification report - http://aprs.fi/\n\n";
+print "report generated: " . gmtime() . " UTC\n";
+print "data covers: " . gmtime($min_t) . " UTC to " . gmtime($max_t) . " UTC\n";
+print "\n";
+
 printf("parsed $lines lines in %.3f s: %.0f lines/s\n", $dur_t, $lines / $dur_t);
 printf("$parse_ok (%.1f %% of total lines) parsed successfully using FAP\n", $parse_ok / $lines * 100);
 printf("$location_packet (%.1f %% of total, %.1f %% of parsed) were location packets\n", $location_packet / $lines * 100, $location_packet / $parse_ok * 100);
@@ -78,6 +83,7 @@ printf("$identify_ok (%.1f %% of location packets) were identified ok\n", $ident
 
 my @calls = keys %call;
 my @calls_id = keys %call_id;
+my $calls_sum = $#calls + 1;
 
 print "\n";
 printf("%d unique srccalls with location packets, %d identified (%.1f %%)\n", $#calls+1, $#calls_id+1, ($#calls_id+1) / ($#calls+1) * 100);
@@ -104,20 +110,17 @@ foreach my $t (sort keys %sum) {
 	print "\n$t:\n";
 	my $h = $sum{$t};
 	foreach my $k (sort { $h->{$b} <=> $h->{$a} } keys %$h) {
-		printf("  %d %s\n", $h->{$k}, $k);
+		printf("  %d (%.1f %%) %s\n", $h->{$k}, $h->{$k} / $calls_sum * 100, $k);
 	}
-}
-
-print "\n";
-print "Unidentified in formats:\n";
-foreach my $k (sort { $unid_format{$a} <=> $unid_format{$b} } keys %unid_format) {
-	printf("    $k $unid_format{$k} (%.1f %%)\n", $unid_format{$k} / ($id_format{$k} + $unid_format{$k}) * 100);
 }
 
 print "\n";
 print "Identified in formats:\n";
 foreach my $k (sort { $id_format{$a} <=> $id_format{$b} } keys %id_format) {
-	printf("    $k $id_format{$k} (%.1f %%)\n", $id_format{$k} / ($id_format{$k} + $unid_format{$k}) * 100);
+	printf("    $k $id_format{$k} (%.1f %%) packets identified, $unid_format{$k} (%.1f %%) unidentified\n",
+		$id_format{$k} / ($id_format{$k} + $unid_format{$k}) * 100,
+		$unid_format{$k} / ($id_format{$k} + $unid_format{$k}) * 100
+	);
 }
 
 print "\n";
@@ -131,8 +134,8 @@ foreach my $k (sort { $unid_dstcall{$b} <=> $unid_dstcall{$a} } keys %unid_dstca
 
 
 print "\n";
-print "Callsigns and vendors:\n";
-foreach my $c (keys %call_id) {
+print "Identification per callsign:\n";
+foreach my $c (sort keys %call_id) {
 	my $h = $call_id{$c};
 	
 	printf("%-15.15s %s: %s\n", $c,
