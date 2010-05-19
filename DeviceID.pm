@@ -356,6 +356,12 @@ my @dstcall_regexps = (
 		'os' => 'Windows',
 		'version_regexp' => 1,
 	} ],
+	[ 'APBL(\\d{2})', {
+		'vendor' => 'BigRedBee',
+		'model' => 'BeeLine GPS',
+		'class' => 'tracker',
+		'version_regexp' => 1,
+	} ],
 	[ 'APC(\\d{3})', {
 		'vendor' => 'Rob Wittner, KZ5RW',
 		'model' => 'APRS/CE',
