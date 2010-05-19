@@ -274,6 +274,12 @@ my %fixed_dstcalls = (
 		'vendor' => 'unknown',
 		'model' => 'PSKAPR',
 	},
+	'APSK63' => {
+		'vendor' => 'Chris Moulding, G4HYG',
+		'model' => 'APRS Messenger',
+		'class' => 'software',
+		'os' => 'Windows',
+	},
 	'APZ186' => {
 		'vendor' => 'IW3FQG',
 		'model' => 'UIdigi',
@@ -621,7 +627,7 @@ my @dstcall_regexps = (
 	} ],
 	[ 'APWW(\\d{2})', {
 		'vendor' => 'KJ4ERJ',
-		'model' => 'APRSISCE',
+		'model' => 'APRSIS32',
 		'class' => 'software',
 		'os' => 'Windows',
 		'version_regexp' => 1,
