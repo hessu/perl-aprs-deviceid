@@ -271,8 +271,9 @@ my %fixed_dstcalls = (
 		'os' => 'Windows',
 	},
 	'PSKAPR' => {
-		'vendor' => 'unknown',
-		'model' => 'PSKAPR',
+		'vendor' => 'Open Source',
+		'model' => 'PSKmail',
+		'class' => 'software',
 	},
 	'APSK63' => {
 		'vendor' => 'Chris Moulding, G4HYG',
