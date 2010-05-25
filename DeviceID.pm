@@ -281,6 +281,12 @@ my %fixed_dstcalls = (
 		'class' => 'software',
 		'os' => 'Windows',
 	},
+	'APN102' => {
+		'vendor' => 'Gregg Wonderly, W5GGW',
+		'model' => 'APRSNow',
+		'class' => 'mobile',
+		'os' => 'ipad',
+	},
 	'APZ186' => {
 		'vendor' => 'IW3FQG',
 		'model' => 'UIdigi',
@@ -406,6 +412,14 @@ my @dstcall_regexps = (
 		'class' => 'mobile',
 		'version_regexp' => 1,
 	} ],
+	
+	[ 'APHH(\d)', {
+		'vendor' => 'Steven D. Bragg, KA9MVA',
+		'model' => 'HamHud',
+		'class' => 'tracker',
+		'version_regexp' => 1,
+	} ],
+	
 	[ 'APHK(\\d{2})', {
 		'vendor' => 'LA1BR',
 		'model' => 'Digipeater/tracker',
@@ -534,6 +548,20 @@ my @dstcall_regexps = (
 		'version_regexp' => 1,
 	} ],
 	
+	[ 'APRRT(\d)', {
+		'vendor' => 'RPC Electronics',
+		'model' => 'RTrak',
+		'class' => 'tracker',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APRHH(\d)', {
+		'vendor' => 'Steven D. Bragg, KA9MVA',
+		'model' => 'HamHud',
+		'class' => 'tracker',
+		'version_regexp' => 1,
+	} ],
+	
 	[ 'APRX([0-3].)', {
 		'vendor' => 'OH2MQK',
 		'model' => 'aprx',
@@ -649,6 +677,14 @@ my @dstcall_regexps = (
 	} ],
 	
 	[ 'APZG(\\d{2})', {
+		'vendor' => 'OH2GVE',
+		'model' => 'aprsg',
+		'class' => 'software',
+		'os' => 'Linux/Unix',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APRG(\\d{2})', {
 		'vendor' => 'OH2GVE',
 		'model' => 'aprsg',
 		'class' => 'software',
