@@ -181,7 +181,7 @@ my %response = (
 	'ftm350' => {
 		'vendor' => 'Yaesu',
 		'model' => 'FTM-350',
-		'class' => 'ht',
+		'class' => 'rig',
 		'messaging' => 1,
 	},
 	'tt3' => {
@@ -221,7 +221,7 @@ my %fixed_dstcalls = (
 	'APCLEZ' => {
 		'vendor' => 'ZS6EY',
 		'model' => 'Telit EZ10 GSM application',
-		'class' => 'wx',
+		'class' => 'tracker',
 	},
 	
 	'APZMDR' => {
@@ -801,7 +801,15 @@ sub identify($)
 				#warn "trying '$regexp' against " . $p->{'dstcallsign'} . "\n";
 				if ($p->{'dstcallsign'} =~ $compiled) {
 					#warn "match!\n";
-					$p->{'deviceid'} = $response;
+					my %copy = %{ $response };
+					$p->{'deviceid'} = \%copy;
+					
+					if ($response->{'version_regexp'}) {
+						#warn "version_regexp set: $1 from " . $p->{'dstcallsign'} . " using " . $regexp . "\n";
+						$p->{'deviceid'}->{'version'} = $1;
+						delete $p->{'deviceid'}->{'version_regexp'};
+					}
+					
 					return 1;
 				}
 			}
