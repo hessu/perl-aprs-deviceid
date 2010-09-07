@@ -310,8 +310,8 @@ my %fixed_dstcalls = (
 my @dstcall_regexps = (
 	[ 'APJI(\\d+)', {
 		'vendor' => 'Peter Loveall, AE5PL',
-		'model' => 'D-Star APJI',
-		'class' => 'dstar',
+		'model' => 'jAPRSIgate',
+		'class' => 'software',
 		'version_regexp' => 1,
 	} ],
 	[ 'APD(\\d+)', {
@@ -441,11 +441,6 @@ my @dstcall_regexps = (
 	[ 'APJE(\\d{2})', {
 		'vendor' => 'Gregg Wonderly, W5GGW',
 		'model' => 'JeAPRS',
-		'version_regexp' => 1,
-	} ],
-	[ 'APJI(\\d{2})', {
-		'vendor' => 'Peter Loveall, AE5PL',
-		'model' => 'jAPRSIgate',
 		'version_regexp' => 1,
 	} ],
 	[ 'APJS(\\d{2})', {
