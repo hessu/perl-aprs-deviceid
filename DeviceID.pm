@@ -9,11 +9,17 @@ Ham::APRS::DeviceID - APRS device identifier
 
   use Ham::APRS::FAP qw(parseaprs);
   use Ham::APRS::DeviceID;
+  use Data::Dumper;
+  
   my $aprspacket = 'OH2RDP>APZMDR,OH2RDG*,WIDE:!6028.51N/02505.68E#PHG7220/RELAY,WIDE, OH2AP Jarvenpaa';
-  my %packetdata;
-  my $retval = parseaprs($aprspacket, \%packetdata);
+  my %packet;
+  my $retval = parseaprs($aprspacket, \%packet);
   if ($retval == 1) {
-  	Ham::APRS::DeviceID::identify(\%packetdata);
+  	Ham::APRS::DeviceID::identify(\%packet);
+  	
+  	if (defined $packet{'deviceid'}) {
+  	    print Dumper($packet{'deviceid'});
+  	}
   }
 
 =head1 ABSTRACT
