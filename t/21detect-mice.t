@@ -26,7 +26,7 @@ BEGIN {
 		[ '\'m=Il -/\'TT4 v0.63|4', 'Byonics', 'TinyTrak4', undef, ],
 	);
 	
-	plan tests => ($#tests+1) * 4;
+	plan tests => ($#tests+1) * 5;
 };
 
 use Ham::APRS::FAP qw(parseaprs);
@@ -51,6 +51,7 @@ foreach my $test (@tests) {
 	
 	my $success = identify(\%h);
 	
+	ok($success, 1, "device identification reported failure '$h{deviceid_resultcode}' with for $vendor - $model");
 	ok(defined $h{'deviceid'}, 1, "device identification failed for $vendor - $model");
 	ok($h{'deviceid'}{'vendor'}, $vendor, "wrong vendor for $vendor - $model");
 	ok($h{'deviceid'}{'model'}, $model, "wrong model for $vendor - $model");

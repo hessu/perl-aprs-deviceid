@@ -2,3 +2,8 @@ Revision history for Perl extension Ham::APRS::DeviceID.
 
 1.00
 	- original version
+
+1.01
+	- return more result code
+	- tune tests to log result codes
+	- a few more checks in dstcall and mice tests

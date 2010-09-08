@@ -76,7 +76,7 @@ our @EXPORT_OK = (
 ##	
 ##);
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 
 # Preloaded methods go here.
