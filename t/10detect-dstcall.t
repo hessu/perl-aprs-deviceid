@@ -12,7 +12,7 @@ BEGIN {
 		[ 'AP123U', 'Painter Engineering', 'uSmartDigi Digipeater', undef, ],
 	);
 	
-	plan tests => ($#tests+1) * 4;
+	plan tests => ($#tests+1) * 5;
 };
 
 use Ham::APRS::FAP qw(parseaprs);
@@ -27,14 +27,15 @@ foreach my $test (@tests) {
 	#warn "test $dstcall\n";
 	
 	my $header = "$srccall>$dstcall,TCPIP*,qAC,FOURTH";
-	my $aprspacket = "$header:$body";
+	my $pac = "$header:$body";
 	
 	my %h;
-	my $retval = parseaprs($aprspacket, \%h);
+	my $retval = parseaprs($pac, \%h);
 	ok($retval, 1, "failed to parse a packet with dstcall of $dstcall");
 	
 	my $success = identify(\%h);
-	ok(defined $h{'deviceid'}, 1, "device identification failed with dstcall of $dstcall");
+	ok($success, 1, "device identification reported failure '$h{deviceid_resultcode}' with dstcall of $dstcall, parsed packet has '$h{dstcallsign}'");
+	ok(defined $h{'deviceid'}, 1, "device identification did not return deviceid hash with dstcall $dstcall, parsed packet has '$h{dstcallsign}'");
 	ok($h{'deviceid'}{'vendor'}, $vendor, "wrong vendor for dstcall $dstcall");
 	ok($h{'deviceid'}{'model'}, $model, "wrong model for dstcall $dstcall");
 }

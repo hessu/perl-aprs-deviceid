@@ -86,7 +86,11 @@ my $debug = 0;
 
 my %result_messages = (
 	'unknown' => 'Unsupported packet format',
-	
+	'no_dstcall' => 'Packet has no destination callsign',
+	'no_format' => 'Packet has no defined format',
+	'mice_no_comment' => 'Mic-e packet with no comment defined',
+	'mice_no_deviceid' => 'Mic-e packet with no device identifier in comment',
+	'no_id' => 'No device identification found',
 );
 
 # these functions are used to report warnings and parser errors
@@ -96,23 +100,25 @@ sub _a_err($$;$)
 {
 	my ($rethash, $errcode, $val) = @_;
 	
-	$rethash->{'resultcode'} = $errcode;
-	$rethash->{'resultmsg'}
+	$rethash->{'deviceid_resultcode'} = $errcode;
+	$rethash->{'deviceid_resultmsg'}
 		= defined $result_messages{$errcode}
 		? $result_messages{$errcode} : $errcode;
 	
-	$rethash->{'resultmsg'} .= ': ' . $val if (defined $val);
+	$rethash->{'deviceid_resultmsg'} .= ': ' . $val if (defined $val);
 	
 	if ($debug > 0) {
-		warn "Ham::APRS::DeviceID ERROR $errcode: " . $rethash->{'resultmsg'} . "\n";
+		warn "Ham::APRS::DeviceID ERROR $errcode: " . $rethash->{'deviceid_resultmsg'} . "\n";
 	}
+	
+	return 0;
 }
 
 sub _a_warn($$;$)
 {
 	my ($rethash, $errcode, $val) = @_;
 	
-	push @{ $rethash->{'warncodes'} }, $errcode;
+	push @{ $rethash->{'deviceid_warncodes'} }, $errcode;
 	
 	if ($debug > 0) {
 		warn "Ham::APRS::DeviceID WARNING $errcode: "
@@ -121,6 +127,8 @@ sub _a_warn($$;$)
 		    . (defined $val ? ": $val" : '')
 		    . "\n";
 	}
+	
+	return 0;
 }
 
 
@@ -756,15 +764,18 @@ sub identify($)
 {
 	my($p) = @_;
 	
-	if (!defined $p->{'dstcallsign'} || !defined $p->{'format'}) {
-		return 0;
-	}
+	$p->{'deviceid_resultcode'} = '';
+	
+	return _a_err($p, 'no_format') if (!defined $p->{'format'});
+	return _a_err($p, 'no_dstcall') if (!defined $p->{'dstcallsign'});
 	
 	if ($p->{'format'} eq 'mice') {
 		#warn Dumper($p);
 		my $resp;
 		#warn "comment: " . $p->{'comment'} . "\n";
-		return 0 if (!defined $p->{'comment'});
+		if (!defined $p->{'comment'}) {
+			return _a_err($p, 'mice_no_comment');
+		}
 		if ($p->{'comment'} =~ s/^>//) {
 			$resp = 'd7';
 		} elsif ($p->{'comment'} =~ s/^\](.*)=$/$1/) {
@@ -786,7 +797,7 @@ sub identify($)
 			$p->{'deviceid'} = $response{$resp};
 			return 1;
 		}
-		return 0;
+		return _a_err($p, 'mice_no_deviceid');
 	}
 	
 	if (defined $fixed_dstcalls{$p->{'dstcallsign'}}) {
@@ -817,7 +828,7 @@ sub identify($)
 		}
 	}
 	
-	return 0;
+	return _a_err($p, 'no_id');
 }
 
 
