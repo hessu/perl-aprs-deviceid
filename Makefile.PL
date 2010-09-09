@@ -7,7 +7,7 @@ WriteMakefile(
     'VERSION_FROM'	=> 'DeviceID.pm', # finds $VERSION
     'PREREQ_PM'		=> {
         'Test::More' => '0.1',
-        'Ham::APRS::FAP' => '1.13',
+        'Ham::APRS::FAP' => '1.16',
     },
     ($] >= 5.005 ?    ## Add these new keywords supported since 5.005
       (
