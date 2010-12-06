@@ -10,6 +10,8 @@ BEGIN {
 		#[ '\`abc123Rtext...', undef, undef, undef, ],
 		[ '`0HioRHk/>text...', 'Kenwood', 'TH-D7', undef, ],
 		[ '`0HioRHk/>123}text...', 'Kenwood', 'TH-D7', undef, ],
+		[ '`0HioRHk/>text...=', 'Kenwood', 'TH-D72', undef, ],
+		[ '`0HioRHk/>123}text...=', 'Kenwood', 'TH-D72', undef, ],
 		[ '`0HioRHk/]text...', 'Kenwood', 'TM-D700', undef, ],
 		[ '`0HioRHk/]";g}146.520MHznow listening=', 'Kenwood', 'TM-D710', undef, ],
 		[ '`0HioRHk/]text...', 'Kenwood', 'TM-D700', undef, ],

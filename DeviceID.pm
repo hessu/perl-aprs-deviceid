@@ -76,7 +76,7 @@ our @EXPORT_OK = (
 ##	
 ##);
 
-our $VERSION = '1.01';
+our $VERSION = '1.02';
 
 
 # Preloaded methods go here.
@@ -165,6 +165,12 @@ my %response = (
 	'd7' => {
 		'vendor' => 'Kenwood',
 		'model' => 'TH-D7',
+		'class' => 'ht',
+		'messaging' => 1,
+	},
+	'd72' => {
+		'vendor' => 'Kenwood',
+		'model' => 'TH-D72',
 		'class' => 'ht',
 		'messaging' => 1,
 	},
@@ -776,7 +782,9 @@ sub identify($)
 		if (!defined $p->{'comment'}) {
 			return _a_err($p, 'mice_no_comment');
 		}
-		if ($p->{'comment'} =~ s/^>//) {
+		if ($p->{'comment'} =~ s/^>(.*)=$/$1/) {
+			$resp = 'd72';
+		} elsif ($p->{'comment'} =~ s/^>//) {
 			$resp = 'd7';
 		} elsif ($p->{'comment'} =~ s/^\](.*)=$/$1/) {
 			$resp = 'd710';
