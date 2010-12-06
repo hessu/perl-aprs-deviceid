@@ -12,3 +12,6 @@ Revision history for Perl extension Ham::APRS::DeviceID.
 	- fixed Makefile.PL to require Ham::APRS::FAP 1.16, as this is
 	  what we really need to get the 'format' key right
 
+1.03
+	- added support for Kenwood TH-D72
+
