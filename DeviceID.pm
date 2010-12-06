@@ -307,6 +307,12 @@ my %fixed_dstcalls = (
 		'class' => 'mobile',
 		'os' => 'ipad',
 	},
+	'APRNOW' => {
+		'vendor' => 'Gregg Wonderly, W5GGW',
+		'model' => 'APRSNow',
+		'class' => 'mobile',
+		'os' => 'ipad',
+	},
 	'APZ186' => {
 		'vendor' => 'IW3FQG',
 		'model' => 'UIdigi',
@@ -324,6 +330,17 @@ my %fixed_dstcalls = (
 		'model' => 'UIdigi',
 		'class' => 'digi',
 		'version' => '19'
+	},
+	'APKRAM' => {
+		'vendor' => 'kramstuff.com',
+		'model' => 'Ham Tracker',
+		'class' => 'mobile',
+		'os' => 'iphone',
+	},
+	'APK003' => {
+		'vendor' => 'Kenwood',
+		'model' => 'TH-D72',
+		'class' => 'ht',
 	},
 );
 
