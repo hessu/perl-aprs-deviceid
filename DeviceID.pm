@@ -503,8 +503,17 @@ my @dstcall_regexps = (
 		'vendor' => 'Open Source',
 		'model' => 'APRSdroid',
 		'os' => 'Android',
+		'class' => 'mobile',
 		'version_regexp' => 1,
 	} ],
+	[ 'APDR(\\d{2})', {
+		'vendor' => 'Open Source',
+		'model' => 'APRSdroid',
+		'os' => 'Android',
+		'class' => 'mobile',
+		'version_regexp' => 1,
+	} ],
+	
 	[ 'APN3(\\d{2})', {
 		'vendor' => 'Kantronics',
 		'model' => 'KPC-3',
