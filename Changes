@@ -16,3 +16,7 @@ Revision history for Perl extension Ham::APRS::DeviceID.
 	- added support for Kenwood TH-D72
 	- added APRNOW dstcall for APRSNow, APKRAM for Ham Tracker iphone app
 
+
+1.04
+	- added support for U2APRS, WX3in1, OpenAPRS, APRSdroid
+

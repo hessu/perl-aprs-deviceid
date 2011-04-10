@@ -76,7 +76,7 @@ our @EXPORT_OK = (
 ##	
 ##);
 
-our $VERSION = '1.03';
+our $VERSION = '1.04';
 
 
 # Preloaded methods go here.
@@ -335,7 +335,7 @@ my %fixed_dstcalls = (
 		'vendor' => 'kramstuff.com',
 		'model' => 'Ham Tracker',
 		'class' => 'mobile',
-		'os' => 'iphone',
+		'os' => 'ios',
 	},
 	'APK003' => {
 		'vendor' => 'Kenwood',
@@ -356,6 +356,13 @@ my @dstcall_regexps = (
 		'model' => 'aprsd',
 		'class' => 'software',
 		'os' => 'Linux/Unix',
+		'version_regexp' => 1,
+	} ],
+	[ 'APDU(\\d+)', {
+		'vendor' => 'JA7UDE',
+		'model' => 'U2APRS',
+		'class' => 'mobile',
+		'os' => 'Android',
 		'version_regexp' => 1,
 	} ],
 	[ 'AP4R(\\d+)', {
@@ -562,12 +569,25 @@ my @dstcall_regexps = (
 		'version_regexp' => 1,
 	} ],
 	
+	[ 'APNW(\\d{2})', {
+		'vendor' => 'SQ3FYK',
+		'model' => 'WX3in1',
+		'version_regexp' => 1,
+	} ],
+	
 	[ 'APNX(\\d{2})', {
 		'vendor' => 'K6DBG',
 		'model' => 'TNC-X',
 		'version_regexp' => 1,
 	} ],
 	
+	[ 'APOA(\\d{2})', {
+		'vendor' => 'OpenAPRS',
+		'model' => 'app',
+		'class' => 'mobile',
+		'os' => 'ios',
+		'version_regexp' => 1,
+	} ],
 	[ 'APOT([A-Z0-9]{2})', {
 		'vendor' => 'Argent Data Systems',
 		'model' => 'OpenTracker',
