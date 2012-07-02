@@ -250,6 +250,12 @@ my %fixed_dstcalls = (
 		'class' => 'tracker',
 		'os' => 'embedded',
 	},
+	'APZTKP' => {
+		'vendor' => 'Nick Hanks, N0LP',
+		'model' => 'TrackPoint',
+		'class' => 'tracker',
+		'os' => 'embedded',
+	},
 	'APJID2' => {
 		'vendor' => 'Peter Loveall, AE5PL',
 		'model' => 'D-Star APJID2',
@@ -351,6 +357,13 @@ my @dstcall_regexps = (
 		'class' => 'software',
 		'version_regexp' => 1,
 	} ],
+	[ 'APBPQ(\\d)', {
+		'vendor' => 'John Wiseman, G8BPQ',
+		'model' => 'BPQ32',
+		'class' => 'software',
+		'os' => 'Windows',
+		'version_regexp' => 1,
+	} ],
 	[ 'APD(\\d+)', {
 		'vendor' => 'Open Source',
 		'model' => 'aprsd',
@@ -358,11 +371,47 @@ my @dstcall_regexps = (
 		'os' => 'Linux/Unix',
 		'version_regexp' => 1,
 	} ],
+	[ 'APDI(\\d+)', {
+		'vendor' => 'Bela, HA5DI',
+		'model' => 'DIXPRS',
+		'class' => 'software',
+		'version_regexp' => 1,
+	} ],
+	[ 'APDS(\\d+)', {
+		'vendor' => 'SP9UOB',
+		'model' => 'dsDIGI',
+		'os' => 'embedded',
+		'version_regexp' => 1,
+	} ],
+	[ 'APDST(\\d)', {
+		'vendor' => 'SP9UOB',
+		'model' => 'dsTracker',
+		'os' => 'embedded',
+		'version_regexp' => 1,
+	} ],
 	[ 'APDU(\\d+)', {
 		'vendor' => 'JA7UDE',
 		'model' => 'U2APRS',
 		'class' => 'mobile',
 		'os' => 'Android',
+		'version_regexp' => 1,
+	} ],
+	[ 'APDW(\\d+)', {
+		'vendor' => 'WB2OSZ',
+		'model' => 'DireWolf',
+		'version_regexp' => 1,
+	} ],
+	[ 'APMG(\\d+)', {
+		'vendor' => 'Alex, AB0TJ',
+		'model' => 'MiniGate',
+		'class' => 'software',
+		'os' => 'Netduino',
+		'version_regexp' => 1,
+	} ],
+	[ 'APJY(\\d+)', {
+		'vendor' => 'KA2DDO',
+		'model' => 'YAAC',
+		'class' => 'software',
 		'version_regexp' => 1,
 	} ],
 	[ 'AP4R(\\d+)', {
@@ -572,6 +621,7 @@ my @dstcall_regexps = (
 	[ 'APNW(\\d{2})', {
 		'vendor' => 'SQ3FYK',
 		'model' => 'WX3in1',
+		'os' => 'embedded',
 		'version_regexp' => 1,
 	} ],
 	
@@ -671,6 +721,12 @@ my @dstcall_regexps = (
 		'vendor' => 'Byonics',
 		'model' => 'WXTrak',
 		'class' => 'wx',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APTR(\\d{2})', {
+		'vendor' => 'Motorola',
+		'model' => 'MotoTRBO',
 		'version_regexp' => 1,
 	} ],
 	
