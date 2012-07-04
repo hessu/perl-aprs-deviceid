@@ -76,8 +76,7 @@ our @EXPORT_OK = (
 ##	
 ##);
 
-our $VERSION = '1.04';
-
+our $VERSION = '1.05';
 
 # Preloaded methods go here.
 
@@ -369,6 +368,12 @@ my @dstcall_regexps = (
 		'model' => 'aprsd',
 		'class' => 'software',
 		'os' => 'Linux/Unix',
+		'version_regexp' => 1,
+	} ],
+	[ 'APDG(\\d+)', {
+		'vendor' => 'Jonathan, G4KLX',
+		'model' => 'ircDDB Gateway',
+		'class' => 'dstar',
 		'version_regexp' => 1,
 	} ],
 	[ 'APDI(\\d+)', {
