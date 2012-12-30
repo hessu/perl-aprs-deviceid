@@ -23,3 +23,6 @@ Revision history for Perl extension Ham::APRS::DeviceID.
 1.05
 	- added support for TrackPoint, BPQ32, ircDDB Gateway, DIXPRS,
 	  dsDIGI, dsTracker, DireWolf, MiniGate, YAAC, MotoTRBO
+1.06
+	- added support for KissOZ, anyfrog, unknown mic-e, SARTrack,
+	  Altus Metrum, SM2APRS, aprsc, NW Digital Radio UDR
