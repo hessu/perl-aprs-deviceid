@@ -213,6 +213,20 @@ my %response = (
 		'model' => 'TinyTrak4',
 		'class' => 'tracker',
 	},
+	'kissoz' => {
+		'vendor' => 'OZ1EKD, OZ7HVO',
+		'model' => 'KissOZ',
+		'class' => 'tracker',
+	},
+	'anyfrog' => {
+		'vendor' => 'HinzTec',
+		'model' => 'anyfrog',
+		'class' => 'tracker',
+	},
+	'unknown' => {
+		'vendor' => 'Unknown',
+		'model' => 'Other Mic-E',
+	},
 );
 
 my %fixed_dstcalls = (
@@ -306,6 +320,12 @@ my %fixed_dstcalls = (
 		'class' => 'software',
 		'os' => 'Windows',
 	},
+	'APSAR' => {
+		'vendor' => 'ZL4FOX',
+		'model' => 'SARTrack',
+		'class' => 'software',
+		'os' => 'Windows',
+	},
 	'APN102' => {
 		'vendor' => 'Gregg Wonderly, W5GGW',
 		'model' => 'APRSNow',
@@ -350,6 +370,12 @@ my %fixed_dstcalls = (
 );
 
 my @dstcall_regexps = (
+	[ 'APAM(\\d+)', {
+		'vendor' => 'Altus Metrum',
+		'model' => 'AltOS',
+		'class' => 'tracker',
+		'version_regexp' => 1,
+	} ],
 	[ 'APJI(\\d+)', {
 		'vendor' => 'Peter Loveall, AE5PL',
 		'model' => 'jAPRSIgate',
@@ -511,7 +537,15 @@ my @dstcall_regexps = (
 		'version_regexp' => 1,
 	} ],
 	
-	[ 'APHH(\d)', {
+	[ 'APHAX(\\d)', {
+		'vendor' => 'PY2UEP',
+		'model' => 'SM2APRS SondeMonitor',
+		'class' => 'software',
+		'os' => 'Windows',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APHH(\\d)', {
 		'vendor' => 'Steven D. Bragg, KA9MVA',
 		'model' => 'HamHud',
 		'class' => 'tracker',
@@ -650,6 +684,13 @@ my @dstcall_regexps = (
 		'version_regexp' => 1,
 	} ],
 	
+	[ 'APOZ([A-Z0-9]{2})', {
+		'vendor' => 'OZ1EKD, OZ7HVO',
+		'model' => 'KissOZ',
+		'class' => 'tracker',
+		'version_regexp' => 1,
+	} ],
+	
 	[ 'APPT([A-Z0-9]{2})', {
 		'vendor' => 'JF6LZE',
 		'model' => 'KetaiTracker',
@@ -697,6 +738,12 @@ my @dstcall_regexps = (
 		'version_regexp' => 1,
 	} ],
 	
+	[ 'APSC(\\d{2})', {
+		'vendor' => 'OH2MQK, OH7LZB',
+		'model' => 'aprsc',
+		'class' => 'software',
+		'version_regexp' => 1,
+	} ],
 	
 	[ 'APTT([0-9])', {
 		'vendor' => 'Byonics',
@@ -747,6 +794,12 @@ my @dstcall_regexps = (
 		'model' => 'UI-View16',
 		'class' => 'software',
 		'os' => 'Windows',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APUDR(\\d)', {
+		'vendor' => 'NW Digital Radio',
+		'model' => 'UDR',
 		'version_regexp' => 1,
 	} ],
 	
@@ -907,6 +960,12 @@ sub identify($)
 			$resp = 'tt3';
 		} elsif ($p->{'comment'} =~ s/^\'(.*)\|4$/$1/) {
 			$resp = 'tt4';
+		} elsif ($p->{'comment'} =~ s/^[`\'](.*)\*[0-9]$/$1/) {
+			$resp = 'kissoz';
+		} elsif ($p->{'comment'} =~ s/^[`\'](.*)^.$/$1/) {
+			$resp = 'anyfrog';
+		} elsif ($p->{'comment'} =~ s/^[`\'](.*)~.$/$1/) {
+			$resp = 'unknown';
 		}
 		if ($resp) {
 			$p->{'deviceid'} = $response{$resp};
