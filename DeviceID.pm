@@ -367,6 +367,36 @@ my %fixed_dstcalls = (
 		'model' => 'TH-D72',
 		'class' => 'ht',
 	},
+	'APMI01' => {
+		'vendor' => 'Microsat',
+		'os' => 'embedded',
+		'model' => 'WX3in1',
+		'version_regexp' => 1,
+	},
+	'APMI02' => {
+		'vendor' => 'Microsat',
+		'os' => 'embedded',
+		'model' => 'WXEth',
+		'version_regexp' => 1,
+	},
+	'APMI03' => {
+		'vendor' => 'Microsat',
+		'os' => 'embedded',
+		'model' => 'PLXDigi',
+		'version_regexp' => 1,
+	},
+	'APMI04' => {
+		'vendor' => 'Microsat',
+		'os' => 'embedded',
+		'model' => 'WX3in1 Mini',
+		'version_regexp' => 1,
+	},
+	'APMI05' => {
+		'vendor' => 'Microsat',
+		'os' => 'embedded',
+		'model' => 'PLXTracker',
+		'version_regexp' => 1,
+	},
 );
 
 my @dstcall_regexps = (
@@ -564,6 +594,11 @@ my @dstcall_regexps = (
 		'class' => 'dstar',
 		'version_regexp' => 1,
 	} ],
+	[ 'APIC(\\d{2})', {
+		'vendor' => 'HA9MCQ',
+		'model' => 'PICiGATE',
+		'version_regexp' => 1,
+	} ],
 	
 	[ 'APJA(\\d{2})', {
 		'vendor' => 'K4HG & AE5PL',
@@ -594,6 +629,12 @@ my @dstcall_regexps = (
 		'version_regexp' => 1,
 	} ],
 	
+	[ 'APLM(..)', {
+		'vendor' => 'WA0TQG',
+		'class' => 'software',
+		'version_regexp' => 1,
+	} ],
+	
 	[ 'APAND(\\d)', {
 		'vendor' => 'Open Source',
 		'model' => 'APRSdroid',
@@ -606,6 +647,12 @@ my @dstcall_regexps = (
 		'model' => 'APRSdroid',
 		'os' => 'Android',
 		'class' => 'mobile',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APMI(..)', {
+		'vendor' => 'Microsat',
+		'os' => 'embedded',
 		'version_regexp' => 1,
 	} ],
 	
@@ -675,6 +722,12 @@ my @dstcall_regexps = (
 		'model' => 'app',
 		'class' => 'mobile',
 		'os' => 'ios',
+		'version_regexp' => 1,
+	} ],
+	[ 'APOLU(.)', {
+		'vendor' => 'AMSAT-LU',
+		'model' => 'Oscar',
+		'class' => 'satellite',
 		'version_regexp' => 1,
 	} ],
 	[ 'APOT([A-Z0-9]{2})', {
@@ -822,11 +875,18 @@ my @dstcall_regexps = (
 		'version_regexp' => 1,
 	} ],
 	
-	[ 'APWM(\\d{2})', {
+	[ 'APWA(..)', {
 		'vendor' => 'KJ4ERJ',
 		'model' => 'APRSISCE',
 		'class' => 'software',
-		'os' => 'Windows CE',
+		'os' => 'Android',
+		'version_regexp' => 1,
+	} ],
+	[ 'APWM(..)', {
+		'vendor' => 'KJ4ERJ',
+		'model' => 'APRSISCE',
+		'class' => 'software',
+		'os' => 'Windows Mobile',
 		'version_regexp' => 1,
 	} ],
 	[ 'APWW(\\d{2})', {
