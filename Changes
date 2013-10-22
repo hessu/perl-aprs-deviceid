@@ -26,3 +26,9 @@ Revision history for Perl extension Ham::APRS::DeviceID.
 1.06
 	- added support for KissOZ, anyfrog, unknown mic-e, SARTrack,
 	  Altus Metrum, SM2APRS, aprsc, NW Digital Radio UDR
+1.07
+	- added support for Numerous Microsat devices, HA9MCQ PICiGATE,
+	  WA0TQG APLM something, AMSAT-LU Oscar satellites, APRSISCE for
+	  Android
+	- updated APWM APRSISCE to accept letters in tocall, changed OS
+	  to Windows Mobile
