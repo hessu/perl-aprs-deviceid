@@ -197,9 +197,21 @@ my %response = (
 		'class' => 'ht',
 		'messaging' => 1,
 	},
+	'ft1d' => {
+		'vendor' => 'Yaesu',
+		'model' => 'FT-1D',
+		'class' => 'ht',
+		'messaging' => 1,
+	},	
 	'ftm350' => {
 		'vendor' => 'Yaesu',
 		'model' => 'FTM-350',
+		'class' => 'rig',
+		'messaging' => 1,
+	},
+	'ftm400' => {
+		'vendor' => 'Yaesu',
+		'model' => 'FTM-400',
 		'class' => 'rig',
 		'messaging' => 1,
 	},
@@ -290,6 +302,13 @@ my %fixed_dstcalls = (
 	'APNK01' => {
 		'vendor' => 'Kenwood',
 		'model' => 'TM-D700',
+		'class' => 'rig',
+		'messaging' => 1,
+		'version_regexp' => 1,
+	},
+	'APY01D' => {
+		'vendor' => 'Yaesu',
+		'model' => 'FT-1D',
 		'class' => 'rig',
 		'messaging' => 1,
 		'version_regexp' => 1,
@@ -628,7 +647,12 @@ my @dstcall_regexps = (
 		'class' => 'rig',
 		'version_regexp' => 1,
 	} ],
-	
+	[ 'APY(\\d.})', {
+		'vendor' => 'Yaesu',
+		'model' => 'FT-1D',
+		'class' => 'rig',
+		'version_regexp' => 1,
+	} ], 	
 	[ 'APLM(..)', {
 		'vendor' => 'WA0TQG',
 		'class' => 'software',
@@ -1012,8 +1036,12 @@ sub identify($)
 			$resp = 'd700';
 		} elsif ($p->{'comment'} =~ s/^`(.*)_\s*$/$1/) {
 			$resp = 'vx8';
+		} elsif ($p->{'comment'} =~ s/^`(.*)_$$/$1/) {
+			$resp = 'ft1d';			
 		} elsif ($p->{'comment'} =~ s/^`(.*)_"$/$1/) {
 			$resp = 'ftm350';
+		} elsif ($p->{'comment'} =~ s/^`(.*)_%$/$1/) {
+			$resp = 'ftm400';	
 		} elsif ($p->{'comment'} =~ s/^`(.*)_#$/$1/) {
 			$resp = 'vx8g';
 		} elsif ($p->{'comment'} =~ s/^\'(.*)\|3$/$1/) {
