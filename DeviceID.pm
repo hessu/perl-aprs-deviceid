@@ -1036,7 +1036,7 @@ sub identify($)
 			$resp = 'd700';
 		} elsif ($p->{'comment'} =~ s/^`(.*)_\s*$/$1/) {
 			$resp = 'vx8';
-		} elsif ($p->{'comment'} =~ s/^`(.*)_$$/$1/) {
+		} elsif ($p->{'comment'} =~ s/^`(.*)_\$$/$1/) {
 			$resp = 'ft1d';			
 		} elsif ($p->{'comment'} =~ s/^`(.*)_"$/$1/) {
 			$resp = 'ftm350';
