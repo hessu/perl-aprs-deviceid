@@ -162,6 +162,11 @@ sub debug($)
 	}
 }
 
+#
+# Prebaked responses for "legacy" devices, including the VX-8 which has a
+# space (0x20) character as the last byte, which commonly gets eaten by
+# UI-View
+#
 my %response = (
 	'd7' => {
 		'vendor' => 'Kenwood',
@@ -326,7 +331,6 @@ sub identify($)
 	
 	if ($p->{'format'} eq 'mice') {
 		#warn Dumper($p);
-		my $resp;
 		#warn "comment: " . $p->{'comment'} . "\n";
 		if (!defined $p->{'comment'}) {
 			return _a_err($p, 'mice_no_comment');
@@ -344,21 +348,19 @@ sub identify($)
 			$p->{'deviceid'} = $response{'d700'};
 			return 1;
 		} elsif ($p->{'comment'} =~ s/^`(.*)_\s*$/$1/) {
+			# vx-8 has a space as the last character, which commonly gets eaten by ui-view,
+			# so handle it with a relaxed regexp
 			$p->{'deviceid'} = $response{'vx8'};
 			return 1;
-		} elsif ($p->{'comment'} =~ /^[`\'](.*)(..)$/) {
-			my($s, $code) = ($1, $2);
+		} elsif ($p->{'comment'} =~ /^([`\'])(.*)(..)$/) {
+			my($b, $s, $code) = ($1, $2, $3);
 			
 			if (defined $mice_codes{$code}) {
-				# TODO workaround vx-8 space bug
 				$p->{'deviceid'} = $mice_codes{$code};
 				$p->{'comment'} = $s;
+				$p->{'messaging'} = 1 if ($b eq '`');
 				return 1;
 			}
-		}
-		if ($resp) {
-			$p->{'deviceid'} = $response{$resp};
-			return 1;
 		}
 		return _a_err($p, 'mice_no_deviceid');
 	}
