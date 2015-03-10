@@ -2,6 +2,7 @@ Changes
 Makefile.PL
 MANIFEST
 DeviceID.pm
+share/tocalls.yaml
 README
 LICENSE
 t/00load-module.t

@@ -52,6 +52,7 @@ use warnings;
 
 require Exporter;
 use YAML::Tiny;
+use File::ShareDir ':ALL';
 
 our @ISA = qw(Exporter);
 
@@ -266,7 +267,7 @@ sub _load_tocalls(@)
 
 sub _load()
 {
-	my $src = 'tocalls.yaml';
+	my $src = dist_file('Ham-APRS-DeviceID', 'tocalls.yaml');
 	my $yaml = YAML::Tiny->new;
 	my $c = YAML::Tiny->read($src);
 	if (!defined $c) {
