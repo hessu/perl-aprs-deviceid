@@ -8,6 +8,14 @@ software version of an APRS transmitter. It looks at details found
 in the parsed APRS packet (as provided by Ham::APRS::FAP) and updates
 the hash with the identification information, if possible.
 
+The module comes with a device identification database, which is
+simply a copy of the YAML master file maintained separately at:
+
+https://github.com/hessu/aprs-deviceid
+
+The device identification database is available in YAML, JSON and
+XML formats for use in other applications and programming languages.
+
 INSTALLATION
 
 To install this module type the following:
@@ -19,7 +27,8 @@ To install this module type the following:
 
 DEPENDENCIES
 
-This module requires a reasonably recent Ham::APRS::FAP module.
+This module requires a reasonably recent Ham::APRS::FAP module, YAML::Tiny to
+load the device identification database and File::ShareDir for finding it.
 
 DOCUMENTATION
 
@@ -32,7 +41,7 @@ THINGS TO DO
 
 COPYRIGHT AND LICENCE
 
-Copyright (C) 2010 Heikki Hannikainen
+Copyright (C) 2010-2015 Heikki Hannikainen
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.

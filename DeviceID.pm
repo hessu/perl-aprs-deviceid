@@ -29,13 +29,19 @@ software version of an APRS transmitter. It looks at details found
 in the parsed APRS packet (as provided by Ham::APRS::FAP) and updates
 the hash with the identification information, if possible.
 
+The module comes with a device identification database, which is
+simply a copy of the YAML master file maintained separately
+at: L<https://github.com/hessu/aprs-deviceid>
+
 =head1 DESCRIPTION
 
 Unless a debugging mode is enabled, all errors and warnings are reported
 through the API (as opposed to printing on STDERR or STDOUT), so that
 they can be reported nicely on the user interface of an application.
 
-This module requires a reasonably recent L<Ham::APRS::FAP> module.
+This module requires a reasonably recent L<Ham::APRS::FAP> module,
+L<YAML::Tiny> to load the device identification database and
+L<File::ShareDir> for finding it.
 
 =head1 EXPORT
 
@@ -412,6 +418,8 @@ __END__
 
 APRS tocalls list, L<http://aprs.org/aprs11/tocalls.txt>
 
+APRS mic-e type codes, L<http://aprs.org/aprs12/mic-e-types.txt>
+
 APRS specification 1.0.1, L<http://www.tapr.org/aprs_working_group.html>
 
 APRS addendums, e.g. L<http://web.usna.navy.mil/~bruninga/aprs/aprs11.html>
@@ -424,7 +432,7 @@ Heikki Hannikainen, OH7LZB E<lt>hessu@hes.iki.fiE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2010 by Heikki Hannikainen
+Copyright 2010-2015 by Heikki Hannikainen
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
