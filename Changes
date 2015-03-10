@@ -32,3 +32,10 @@ Revision history for Perl extension Ham::APRS::DeviceID.
 	  Android
 	- updated APWM APRSISCE to accept letters in tocall, changed OS
 	  to Windows Mobile
+2.00
+	- load actual device identification database from a YAML file, which
+	  is maintained separately at https://github.com/hessu/aprs-deviceid
+	  so that the database can be used in other apps and programming
+	  languages than the perl DeviceID module
+	- a number of new detections in the current database
+
