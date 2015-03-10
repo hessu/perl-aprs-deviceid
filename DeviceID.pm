@@ -198,6 +198,10 @@ my %response = (
 		'class' => 'ht',
 		'messaging' => 1,
 	},
+	'unknown' => {
+		'vendor' => 'Unknown',
+		'model' => 'Other Mic-E',
+	}
 );
 
 my %mice_codes;
@@ -337,31 +341,34 @@ sub identify($)
 		}
 		if ($p->{'comment'} =~ s/^>(.*)=$/$1/) {
 			$p->{'deviceid'} = $response{'d72'};
-			return 1;
 		} elsif ($p->{'comment'} =~ s/^>//) {
 			$p->{'deviceid'} = $response{'d7'};
-			return 1;
 		} elsif ($p->{'comment'} =~ s/^\](.*)=$/$1/) {
 			$p->{'deviceid'} = $response{'d710'};
-			return 1;
 		} elsif ($p->{'comment'} =~ s/^\]//) {
 			$p->{'deviceid'} = $response{'d700'};
-			return 1;
 		} elsif ($p->{'comment'} =~ s/^`(.*)_\s*$/$1/) {
 			# vx-8 has a space as the last character, which commonly gets eaten by ui-view,
 			# so handle it with a relaxed regexp
 			$p->{'deviceid'} = $response{'vx8'};
-			return 1;
 		} elsif ($p->{'comment'} =~ /^([`\'])(.*)(..)$/) {
 			my($b, $s, $code) = ($1, $2, $3);
 			
 			if (defined $mice_codes{$code}) {
 				$p->{'deviceid'} = $mice_codes{$code};
 				$p->{'comment'} = $s;
-				$p->{'messaging'} = 1 if ($b eq '`');
-				return 1;
+			} else {
+				$p->{'deviceid'} = $response{'unknown'};
+				$p->{'comment'} = $s . $code;
 			}
+			$p->{'messaging'} = 1 if ($b eq '`');
 		}
+		
+		if ($p->{'deviceid'}) {
+			$p->{'messaging'} = 1 if ($p->{'deviceid'}->{'messaging'});
+			return 1;
+		}
+		
 		return _a_err($p, 'mice_no_deviceid');
 	}
 	
