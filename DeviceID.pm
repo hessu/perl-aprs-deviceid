@@ -193,44 +193,9 @@ my %response = (
 		'class' => 'ht',
 		'messaging' => 1,
 	},
-	'vx8g' => {
-		'vendor' => 'Yaesu',
-		'model' => 'VX-8G',
-		'class' => 'ht',
-		'messaging' => 1,
-	},
-	'ftm350' => {
-		'vendor' => 'Yaesu',
-		'model' => 'FTM-350',
-		'class' => 'rig',
-		'messaging' => 1,
-	},
-	'tt3' => {
-		'vendor' => 'Byonics',
-		'model' => 'TinyTrak3',
-		'class' => 'tracker',
-	},
-	'tt4' => {
-		'vendor' => 'Byonics',
-		'model' => 'TinyTrak4',
-		'class' => 'tracker',
-	},
-	'kissoz' => {
-		'vendor' => 'OZ1EKD, OZ7HVO',
-		'model' => 'KissOZ',
-		'class' => 'tracker',
-	},
-	'anyfrog' => {
-		'vendor' => 'HinzTec',
-		'model' => 'anyfrog',
-		'class' => 'tracker',
-	},
-	'unknown' => {
-		'vendor' => 'Unknown',
-		'model' => 'Other Mic-E',
-	},
 );
 
+my %mice_codes;
 my %fixed_dstcalls;
 my @dstcall_regexps;
 
@@ -265,6 +230,18 @@ sub _load_tocalls(@)
 	
 }
 
+sub _load_mice(@)
+{
+	my(@tcl) = @_;
+	
+	foreach my $t (@tcl) {
+		my $code = $t->{'code'};
+		delete $t->{'code'};
+		$mice_codes{$code} = $t;
+	}
+	
+}
+
 sub _load()
 {
 	my $src = dist_file('Ham-APRS-DeviceID', 'tocalls.yaml');
@@ -278,6 +255,7 @@ sub _load()
 	$c = $c->[0];
 	
 	_load_tocalls(@{ $c->{'tocalls'} });
+	_load_mice(@{ $c->{'mice'} });
 
 }
 
@@ -354,29 +332,29 @@ sub identify($)
 			return _a_err($p, 'mice_no_comment');
 		}
 		if ($p->{'comment'} =~ s/^>(.*)=$/$1/) {
-			$resp = 'd72';
+			$p->{'deviceid'} = $response{'d72'};
+			return 1;
 		} elsif ($p->{'comment'} =~ s/^>//) {
-			$resp = 'd7';
+			$p->{'deviceid'} = $response{'d7'};
+			return 1;
 		} elsif ($p->{'comment'} =~ s/^\](.*)=$/$1/) {
-			$resp = 'd710';
+			$p->{'deviceid'} = $response{'d710'};
+			return 1;
 		} elsif ($p->{'comment'} =~ s/^\]//) {
-			$resp = 'd700';
+			$p->{'deviceid'} = $response{'d700'};
+			return 1;
 		} elsif ($p->{'comment'} =~ s/^`(.*)_\s*$/$1/) {
-			$resp = 'vx8';
-		} elsif ($p->{'comment'} =~ s/^`(.*)_"$/$1/) {
-			$resp = 'ftm350';
-		} elsif ($p->{'comment'} =~ s/^`(.*)_#$/$1/) {
-			$resp = 'vx8g';
-		} elsif ($p->{'comment'} =~ s/^\'(.*)\|3$/$1/) {
-			$resp = 'tt3';
-		} elsif ($p->{'comment'} =~ s/^\'(.*)\|4$/$1/) {
-			$resp = 'tt4';
-		} elsif ($p->{'comment'} =~ s/^[`\'](.*)\*[0-9]$/$1/) {
-			$resp = 'kissoz';
-		} elsif ($p->{'comment'} =~ s/^[`\'](.*)^.$/$1/) {
-			$resp = 'anyfrog';
-		} elsif ($p->{'comment'} =~ s/^[`\'](.*)~.$/$1/) {
-			$resp = 'unknown';
+			$p->{'deviceid'} = $response{'vx8'};
+			return 1;
+		} elsif ($p->{'comment'} =~ /^[`\'](.*)(..)$/) {
+			my($s, $code) = ($1, $2);
+			
+			if (defined $mice_codes{$code}) {
+				# TODO workaround vx-8 space bug
+				$p->{'deviceid'} = $mice_codes{$code};
+				$p->{'comment'} = $s;
+				return 1;
+			}
 		}
 		if ($resp) {
 			$p->{'deviceid'} = $response{$resp};
