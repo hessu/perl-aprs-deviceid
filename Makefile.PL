@@ -8,6 +8,7 @@ WriteMakefile(
     'PREREQ_PM'		=> {
         'Test::More' => '0.1',
         'Ham::APRS::FAP' => '1.16',
+        'YAML::Tiny' => '1.40'
     },
     ($] >= 5.005 ?    ## Add these new keywords supported since 5.005
       (
