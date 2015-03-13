@@ -39,3 +39,7 @@ Revision history for Perl extension Ham::APRS::DeviceID.
 	  languages than the perl DeviceID module
 	- a number of new detections in the current database
 
+2.01
+	- device database update
+	- mic-e definition changed in database, adjusted parser to match
+
