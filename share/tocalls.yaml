@@ -2,8 +2,9 @@
 #
 # This is a machine-readable index of APRS device and software
 # identification strings.  For easy manual editing and validation, the
-# master file is in YAML format, but conversions to other formats (XML,
-# JSON, CSV) are straightforward and will be provided a bit later.
+# master file is in YAML format.  A conversion tool and pre-converted
+# versions in XML and JSON are also provided for environments where those
+# are more convenient to parse.
 #
 # This list is maintained by Hessu, OH7LZB, for the aprs.fi service.
 # It is licensed under the CC BY-SA 2.0 license, so you're free to use
@@ -53,54 +54,89 @@ classes:
    description: Satellite-based station
 
 #
-# mic-e device identifier index, does not include
-# the "legacy" single-character Kenwood radios yet
+# mic-e device identifier index for new-style 2-character device
+# suffixes. The first prefix byte indicates messaging capability.
 #
 mice:
- - code: "_ "
+ - suffix: "_ "
    vendor: Yaesu
    model: VX-8
    class: ht
    
- - code: "_\""
+ - suffix: "_\""
    vendor: Yaesu
    model: FTM-350
    class: rig
    
- - code: "_#"
+ - suffix: "_#"
    vendor: Yaesu
    model: VX-8G
    class: ht
    
- - code: "_$"
+ - suffix: "_$"
    vendor: Yaesu
    model: FT1D
    class: ht
  
- - code: "_%"
+ - suffix: "_%"
    vendor: Yaesu
    model: FTM-400DR
    class: rig
  
- - code: "|3"
+ - suffix: "|3"
    vendor: Byonics
    model: TinyTrak3
    class: tracker
  
- - code: "|4"
+ - suffix: "|4"
    vendor: Byonics
    model: TinyTrak4
    class: tracker
  
- - code: "^v"
+ - suffix: "^v"
    vendor: HinzTec
    model: anyfrog
  
- - code: "*v"
+ - suffix: "*v"
    vendor: KissOZ
    model: Tracker
    class: tracker
- 
+
+#
+# mic-e legacy devices, with an unique comment suffix and prefix
+#
+
+micelegacy:
+ - prefix: ">"
+   vendor: Kenwood
+   model: TH-D7A
+   class: ht
+   features:
+     - messaging
+
+ - prefix: ">"
+   suffix: "="
+   vendor: Kenwood
+   model: TH-D72
+   class: ht
+   features:
+     - messaging
+
+ - prefix: "]"
+   vendor: Kenwood
+   model: TM-D700
+   class: rig
+   features:
+     - messaging
+
+ - prefix: "]"
+   suffix: "="
+   vendor: Kenwood
+   model: TM-D710
+   class: rig
+   features:
+     - messaging
+
 #
 # TOCALL index
 #
@@ -673,3 +709,24 @@ tocalls:
    vendor: Yaesu
    model: FT1D
    class: ht
+
+ - tocall: APZWKR
+   vendor: GM1WKR
+   model: NetSked
+   class: software
+
+ - tocall: APCWP8
+   vendor: GM7HHB
+   model: WinphoneAPRS
+   class: app
+ 
+ - tocall: APSMS?
+   vendor: Paul Defrusne
+   model: SMS gateway
+   class: software
+ 
+ - tocall: APSTM?
+   vendor: W7QO
+   model: Balloon tracker
+   class: tracker
+

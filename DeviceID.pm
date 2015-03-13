@@ -250,9 +250,9 @@ sub _load_mice(@)
 	my(@tcl) = @_;
 	
 	foreach my $t (@tcl) {
-		my $code = $t->{'code'};
-		delete $t->{'code'};
-		$mice_codes{$code} = $t;
+		my $suffix = $t->{'suffix'};
+		delete $t->{'suffix'};
+		$mice_codes{$suffix} = $t;
 	}
 	
 }
