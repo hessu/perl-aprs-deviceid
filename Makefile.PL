@@ -11,7 +11,7 @@ WriteMakefile(
     'VERSION_FROM'	=> 'DeviceID.pm', # finds $VERSION
     'CONFIGURE_REQUIRES' => {
         'ExtUtils::MakeMaker' => 0,
-        'File::ShareDir::Install' => '1.00',
+        'File::ShareDir::Install' => '0.10',
     },
     'PREREQ_PM'		=> {
         'Test::More' => '0.1',
