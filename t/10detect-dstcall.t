@@ -11,6 +11,7 @@ BEGIN {
 		[ 'APOTC1', 'Argent Data Systems', 'OpenTracker', undef, ],
 		[ 'AP123U', 'Painter Engineering', 'uSmartDigi Digipeater', undef, ],
 		[ 'APK003', 'Kenwood', 'TH-D72', undef, ],
+		[ 'APSTM1', 'W7QO', 'Balloon tracker', undef, ],
 	);
 	
 	plan tests => ($#tests+1) * 5;

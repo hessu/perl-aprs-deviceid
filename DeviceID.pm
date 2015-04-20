@@ -383,7 +383,7 @@ sub identify($)
 		return 1;
 	}
 	
-	foreach my $len (4, 3, 5, 2) {
+	foreach my $len (5, 4, 3, 2) {
 		my $prefix = substr($p->{'dstcallsign'}, 0, $len);
 		if (defined $regexp_prefix{$prefix}) {
 			foreach my $dmatch (@{ $regexp_prefix{$prefix} }) {
