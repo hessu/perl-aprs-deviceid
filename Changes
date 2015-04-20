@@ -43,3 +43,7 @@ Revision history for Perl extension Ham::APRS::DeviceID.
 	- device database update
 	- mic-e definition changed in database, adjusted parser to match
 
+2.02
+	- device database update
+	- fix tocall matching order (longest match first!)
+
