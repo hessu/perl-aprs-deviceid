@@ -47,3 +47,5 @@ Revision history for Perl extension Ham::APRS::DeviceID.
 	- device database update
 	- fix tocall matching order (longest match first!)
 
+2.03
+	- device database udpate
