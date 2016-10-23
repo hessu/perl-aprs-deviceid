@@ -2,6 +2,7 @@
 *~
 
 MYMETA.yml
+MYMETA.json
 Makefile
 *.old
 blib
