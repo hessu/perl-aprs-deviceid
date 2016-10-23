@@ -432,7 +432,7 @@ Heikki Hannikainen, OH7LZB E<lt>hessu@hes.iki.fiE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2010-2015 by Heikki Hannikainen
+Copyright 2010-2016 by Heikki Hannikainen
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
