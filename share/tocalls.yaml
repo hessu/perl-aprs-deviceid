@@ -82,6 +82,11 @@ mice:
    vendor: Yaesu
    model: FT2D
    class: ht
+
+ - suffix: "_0"
+   vendor: Yaesu
+   model: FT3D
+   class: ht
    
  - suffix: "_)"
    vendor: Yaesu
@@ -92,7 +97,17 @@ mice:
    vendor: Yaesu
    model: FTM-400DR
    class: rig
- 
+
+ - suffix: "(5"
+   vendor: Anytone
+   model: D578UV
+   class: ht
+
+ - suffix: "(8"
+   vendor: Anytone
+   model: D878UV
+   class: ht
+
  - suffix: "|3"
    vendor: Byonics
    model: TinyTrak3
@@ -168,6 +183,11 @@ tocalls:
    model: T-238+
    class: wx
 
+ - tocall: APCDS0
+   vendor: ZS6LMG
+   model: cell tracker
+   class: tracker
+
  - tocall: APCLEY
    vendor: ZS6EY
    model: EYTraker
@@ -182,7 +202,11 @@ tocalls:
    vendor: ZS6EY
    model: Telit EZ10 GSM application
    class: tracker
-   
+
+ - tocall: APCSMS
+   vendor: USNA
+   model: Cosmos
+
  - tocall: APZMAJ
    vendor: M1MAJ
    model: DeLorme inReach Tracker
@@ -213,6 +237,11 @@ tocalls:
    model: D-Star APDPRS
    class: dstar
 
+ - tocall: APERS?
+   vendor: Jason, KG7YKZ
+   model: Runner tracking
+   class: tracker
+
  - tocall: APERXQ
    vendor: PE1RXQ
    model: PE1RXQ APRS Tracker
@@ -221,6 +250,11 @@ tocalls:
  - tocall: APECAN
    vendor: KT5TK/DL7AD
    model: Pecan Pico APRS Balloon Tracker
+   class: tracker
+
+ - tocall: APELK?
+   vendor: WB8ELK
+   model: Balloon tracker
    class: tracker
 
  - tocall: APNK01
@@ -344,6 +378,19 @@ tocalls:
    model: AltOS
    class: tracker
 
+ - tocall: APAT??
+   vendor: Anytone
+
+ - tocall: APAT81
+   vendor: Anytone
+   model: AT-D878
+   class: ht
+
+ - tocall: APAT51
+   vendor: Anytone
+   model: AT-D578
+   class: rig
+
  - tocall: APJI??
    vendor: Peter Loveall, AE5PL
    model: jAPRSIgate
@@ -383,6 +430,11 @@ tocalls:
    model: DIXPRS
    class: software
 
+ - tocall: APDV??
+   vendor: OE6PLD
+   model: SSTV with APRS
+   class: software
+
  - tocall: APDS??
    vendor: SP9UOB
    model: dsDIGI
@@ -411,9 +463,8 @@ tocalls:
 
  - tocall: APMG??
    vendor: Alex, AB0TJ
-   model: MiniGate
+   model: PiCrumbs and MiniGate
    class: software
-   os: Netduino
 
  - tocall: APJY??
    vendor: KA2DDO
@@ -464,10 +515,19 @@ tocalls:
    model: AP510
    class: tracker
 
+ - tocall: APBK??
+   vendor: PY5BK
+   model: Bravo Tracker
+   class: tracker
+
  - tocall: APBL??
    vendor: BigRedBee
    model: BeeLine GPS
    class: tracker
+
+ - tocall: APBM??
+   vendor: R3ABM
+   model: BrandMeister DMR
 
  - tocall: APC???
    vendor: Rob Wittner, KZ5RW
@@ -503,6 +563,11 @@ tocalls:
    os: ios
    class: app
 
+ - tocall: APGBLN
+   vendor: NW5W
+   model: GoBalloon
+   class: tracker
+
  - tocall: APGO??
    vendor: AA3NJ
    model: APRS-Go
@@ -528,6 +593,9 @@ tocalls:
    model: HMTracker
    class: tracker
 
+ - tocall: APHW??
+   vendor: HamWAN
+
  - tocall: API???
    vendor: Icom
    model: unknown
@@ -536,6 +604,14 @@ tocalls:
  - tocall: APIC??
    vendor: HA9MCQ
    model: PICiGATE
+
+ - tocall: APIE??
+   vendor: W7KMV
+   model: PiAPRS
+
+ - tocall: APIN??
+   vendor: AB0WV
+   model: PinPoint
 
  - tocall: APJA??
    vendor: K4HG & AE5PL
@@ -558,6 +634,11 @@ tocalls:
    vendor: Kenwood
    model: TM-D700
    class: rig
+
+ - tocall: APLIG?
+   vendor: TA2MUN/TA9OHC
+   model: LightAPRS Tracker
+   class: tracker
 
  - tocall: APLM??
    vendor: WA0TQG
@@ -624,6 +705,10 @@ tocalls:
    class: app
    os: ios
 
+ - tocall: APOCSG
+   vendor: N0AGI
+   model: POCSAG
+
  - tocall: APOLU?
    vendor: AMSAT-LU
    model: Oscar
@@ -639,10 +724,31 @@ tocalls:
    model: KissOZ
    class: tracker
 
+ - tocall: APPIC?
+   vendor: DB1NTO
+   model: PicoAPRS
+   class: tracker
+
+ - tocall: APPM??
+   vendor: DL1MX
+   model: rtl-sdr Python iGate
+   class: software
+
  - tocall: APPT??
    vendor: JF6LZE
    model: KetaiTracker
    class: tracker
+
+ - tocall: APP6??
+   model: APRSlib
+
+ - tocall: APQTH?
+   vendor: Weston Bustraan, W8WJB
+   model: QTH.app
+   class: software
+   os: macOS
+   features:
+     - messaging
 
  - tocall: APR8??
    vendor: Bob Bruninga, WB4APR
@@ -675,6 +781,17 @@ tocalls:
    model: aprsc
    class: software
 
+ - tocall: APSF??
+   vendor: Pierre SAINT-FELIX-CASTETS, F5OPV
+   model: Embedded APRS devices
+   os: embedded
+
+ - tocall: APSFWX
+   vendor: Pierre SAINT-FELIX-CASTETS, F5OPV
+   model: embedded Weather Station
+   class: wx
+   os: embedded
+
  - tocall: APTT*
    vendor: Byonics
    model: TinyTrak
@@ -693,6 +810,20 @@ tocalls:
  - tocall: APT4??
    vendor: Byonics
    model: TinyTrak4
+   class: tracker
+
+ - tocall: APTB??
+   vendor: BG5HHP
+   model: TinyAPRS
+
+ - tocall: APTCHE
+   vendor: PU3IKE
+   model: TcheTracker, Tcheduino
+   class: tracker
+
+ - tocall: APTCMA
+   vendor: Cleber, PU1CMA
+   model: CAPI Tracker
    class: tracker
 
  - tocall: APTW??
@@ -795,6 +926,11 @@ tocalls:
    model: FTM-400
    class: ht
    
+ - tocall: APYS??
+   vendor: W2GMD
+   model: Python APRS
+   class: software
+
  - tocall: APZWKR
    vendor: GM1WKR
    model: NetSked
@@ -806,7 +942,7 @@ tocalls:
    class: app
  
  - tocall: APSMS?
-   vendor: Paul Defrusne
+   vendor: Paul Dufresne
    model: SMS gateway
    class: software
  
@@ -815,3 +951,8 @@ tocalls:
    model: Balloon tracker
    class: tracker
 
+ - tocall: APRARX
+   vendor: Open Source
+   model: radiosonde_auto_rx
+   class: software
+   os: Linux/Unix
