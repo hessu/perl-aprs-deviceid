@@ -24,6 +24,7 @@ BEGIN {
 		[ '`0HioRHk/`text..._"', 'Yaesu', 'FTM-350', undef, 1 ],
 		[ '`0HioRHk/`text..._#', 'Yaesu', 'VX-8G', undef, 1 ],
 		[ '`0HioRHk/`text..._#  ', 'Yaesu', 'VX-8G', undef, 1 ], # additional space
+		[ '`0HioRHk/`text...(5', 'Anytone', 'D578UV', undef, 1 ],
 		[ '`0HioRHk/\'text...|3', 'Byonics', 'TinyTrak3', undef, undef ],
 		[ '`0HioRHk/\'text...|4', 'Byonics', 'TinyTrak4', undef, undef ],
 		[ '\'m=Il -/\'TT4 v0.63|4', 'Byonics', 'TinyTrak4', undef, undef ],
