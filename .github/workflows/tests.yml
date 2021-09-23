@@ -1,0 +1,40 @@
+name: Build Tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: install deps
+      run: |
+        sudo apt-get install -y perl-modules libfile-sharedir-install-perl libyaml-tiny-perl \
+          libfile-sharedir-perl libtest-pod-perl libtest-pod-coverage-perl
+
+    - name: install cpanm and deps
+      uses: perl-actions/install-with-cpanm@v1
+      with:
+        install: |
+          Ham::APRS::FAP
+
+    - name: configure
+      run: |
+        perl Makefile.PL
+
+    - name: make
+      run: |
+        make -j4
+
+    - name: Run tests
+      run: |
+        make test
+
+  
