@@ -13,6 +13,7 @@ BEGIN {
 		[ '`0HioRHk/>text...=', 'Kenwood', 'TH-D72', undef, 1 ],
 		[ '`0HioRHk/>123}text...=', 'Kenwood', 'TH-D72', undef, 1 ],
 		[ '\'y& l  [/>145.110MHz -060 D-STAR>FOO C  / n0^', 'Kenwood', 'TH-D74', undef, 1 ],
+		[ '`0HioRHk/>123}text...&', 'Kenwood', 'TH-D75', undef, 1 ],
 		[ '`0HioRHk/]text...', 'Kenwood', 'TM-D700', undef, 1],
 		[ '`0HioRHk/]";g}146.520MHznow listening=', 'Kenwood', 'TM-D710', undef, 1 ],
 		[ '`0HioRHk/]text...', 'Kenwood', 'TM-D700', undef, 1 ],
