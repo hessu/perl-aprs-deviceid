@@ -192,6 +192,12 @@ my %response = (
 		'class' => 'ht',
 		'messaging' => 1,
 	},
+	'd75' => {
+		'vendor' => 'Kenwood',
+		'model' => 'TH-D75',
+		'class' => 'ht',
+		'messaging' => 1,
+	},
 	'd700' => {
 		'vendor' => 'Kenwood',
 		'model' => 'TM-D700',
@@ -355,6 +361,8 @@ sub identify($)
 			$p->{'deviceid'} = $response{'d72'};
 		} elsif ($p->{'comment'} =~ s/^>(.*)\^$/$1/) {
 			$p->{'deviceid'} = $response{'d74'};
+		} elsif ($p->{'comment'} =~ s/^>(.*)&$/$1/) {
+			$p->{'deviceid'} = $response{'d75'};
 		} elsif ($p->{'comment'} =~ s/^>//) {
 			$p->{'deviceid'} = $response{'d7'};
 		} elsif ($p->{'comment'} =~ s/^\](.*)=$/$1/) {
